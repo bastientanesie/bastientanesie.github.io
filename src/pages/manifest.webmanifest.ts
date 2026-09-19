@@ -8,8 +8,8 @@ export const GET: APIRoute = () => {
     short_name: SITE_NAME,
     start_url: "/",
     display: "browser",
-    background_color: themeColors.light,
-    theme_color: themeColors.light,
+    background_color: themeColors.dark,
+    theme_color: themeColors.dark,
     icons: ICONS.filter(({ inManifest }) => inManifest).map(
       ({ file, size }) => ({
         src: `/${file}`,
