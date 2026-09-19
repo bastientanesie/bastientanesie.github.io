@@ -1,6 +1,6 @@
 # Deployment
 
-The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make` target (`check`, `lint`, `format-check`, `build`), then a `deploy` job that publishes the `dist/` artifact to GitHub Pages. `deploy` only runs on pushes to the repository's default branch.
+The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make` target (`check`, `lint`, `format-check`, `build`, `test`), then a `deploy` job that publishes the `dist/` artifact to GitHub Pages. `deploy` only runs on pushes to the repository's default branch.
 
 ## GitHub settings
 
