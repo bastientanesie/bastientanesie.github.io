@@ -16,6 +16,21 @@ export default defineConfig({
       hastPlugins: [satteriHeadingIdsPlugin(), headingAnchors],
     }),
   },
+  security: {
+    csp: {
+      algorithm: "SHA-256",
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+      styleDirective: {
+        resources: [{ resource: "'unsafe-inline'", kind: "attribute" }],
+      },
+    },
+  },
   integrations: [alpinejs({ entrypoint: "/src/alpine" }), sitemap()],
   vite: {
     plugins: [tailwindcss()],
