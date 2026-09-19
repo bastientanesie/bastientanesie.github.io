@@ -1,0 +1,41 @@
+---
+import ProjectCard from "../../../components/projects/ProjectCard.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import { getPublishedProjects, type Project } from "../../../lib/projects";
+import type { ProjectTag } from "../../../data/tags";
+import { filterByTag, summarizeTags } from "../../../lib/tags";
+
+interface Props {
+  tag: ProjectTag;
+  projects: Project[];
+}
+
+export async function getStaticPaths() {
+  const projects = await getPublishedProjects();
+  return summarizeTags(projects).map(({ tag }) => ({
+    params: { tag },
+    props: { tag, projects: filterByTag(projects, tag) },
+  }));
+}
+
+const { tag, projects } = Astro.props;
+---
+
+<PageLayout
+  title={`Projects tagged #${tag} | Bastien Tanésie`}
+  description={`Projects tagged ${tag}.`}
+>
+  <h1 class="mb-6 text-3xl font-bold">Projects tagged #{tag}</h1>
+  <p class="mb-6">
+    <a href="/projects/tags/" class="underline">
+      All Project tags
+    </a>
+  </p>
+  <ul class="space-y-4">
+    {projects.map((project) => (
+      <li>
+        <ProjectCard project={project} />
+      </li>
+    ))}
+  </ul>
+</PageLayout>

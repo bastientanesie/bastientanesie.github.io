@@ -1,0 +1,33 @@
+---
+import type { TagSummary } from "../lib/tags";
+
+interface Props {
+  tags: TagSummary<string>[];
+  basePath: string;
+}
+
+const { tags, basePath } = Astro.props;
+---
+
+<div x-data="tagFilter">
+  <label class="mb-4 block" hidden x-bind:hidden="isFilterHidden">
+    <span class="mb-1 block text-sm">Filter tags</span>
+    <input
+      type="search"
+      x-model="query"
+      class="w-full max-w-xs rounded-md border border-border px-2 py-1"
+    />
+  </label>
+  <ul class="flex flex-wrap gap-2" aria-label="Tags">
+    {tags.map(({ tag, count }) => (
+      <li data-tag={tag} x-show="isMatching">
+        <a
+          href={`${basePath}${tag}/`}
+          class="rounded-md border border-border px-2 py-1 text-sm underline-offset-4 hover:underline"
+        >
+          #{tag} <span class="text-muted">({count})</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

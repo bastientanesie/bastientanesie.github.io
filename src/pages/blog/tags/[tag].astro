@@ -1,0 +1,41 @@
+---
+import PostCard from "../../../components/blog/PostCard.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import { getPublishedPosts, type Post } from "../../../lib/posts";
+import type { PostTag } from "../../../data/tags";
+import { filterByTag, summarizeTags } from "../../../lib/tags";
+
+interface Props {
+  tag: PostTag;
+  posts: Post[];
+}
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return summarizeTags(posts).map(({ tag }) => ({
+    params: { tag },
+    props: { tag, posts: filterByTag(posts, tag) },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<PageLayout
+  title={`Posts tagged #${tag} | Bastien Tanésie`}
+  description={`Posts tagged ${tag}.`}
+>
+  <h1 class="mb-6 text-3xl font-bold">Posts tagged #{tag}</h1>
+  <p class="mb-6">
+    <a href="/blog/tags/" class="underline">
+      All Post tags
+    </a>
+  </p>
+  <ul class="space-y-4">
+    {posts.map((post) => (
+      <li>
+        <PostCard post={post} />
+      </li>
+    ))}
+  </ul>
+</PageLayout>

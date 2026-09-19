@@ -1,1 +1,12 @@
-export default (): undefined => undefined;
+import type { Alpine } from "alpinejs";
+
+export default (alpine: Alpine): void => {
+  alpine.data("tagFilter", () => ({
+    query: "",
+    isFilterHidden: false,
+    isMatching(): boolean {
+      const tag = this.$el.dataset.tag ?? "";
+      return tag.includes(this.query.trim().toLowerCase());
+    },
+  }));
+};

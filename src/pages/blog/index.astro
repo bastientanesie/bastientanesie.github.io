@@ -11,6 +11,11 @@ const posts = await getPublishedPosts();
   description="Posts by Bastien Tanésie."
 >
   <h1 class="mb-6 text-3xl font-bold">Blog</h1>
+  <p class="mb-6">
+    <a href="/blog/tags/" class="underline">
+      Browse by tag
+    </a>
+  </p>
   <ul class="space-y-4">
     {posts.map((post) => (
       <li>

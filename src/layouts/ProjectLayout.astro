@@ -23,7 +23,14 @@ const { title, description, tags } = project.data;
         </div>
         <ul class="mt-2 flex gap-2 text-sm" aria-label="Tags">
           {tags.map((tag) => (
-            <li class="text-muted">#{tag}</li>
+            <li>
+              <a
+                href={`/projects/tags/${tag}/`}
+                class="text-muted underline-offset-4 hover:underline"
+              >
+                #{tag}
+              </a>
+            </li>
           ))}
         </ul>
       </div>
