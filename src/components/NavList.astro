@@ -1,0 +1,30 @@
+---
+import { navigation } from "../data/site";
+
+interface Props {
+  label: string;
+  currentPath: string;
+  listClass: string;
+  linkClass: string;
+}
+
+const { label, currentPath, listClass, linkClass } = Astro.props;
+const isCurrent = (href: string) =>
+  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+---
+
+<nav aria-label={label}>
+  <ul class={listClass}>
+    {navigation.map((item) => (
+      <li>
+        <a
+          href={item.href}
+          aria-current={isCurrent(item.href) ? "page" : undefined}
+          class={`underline-offset-4 hover:underline aria-[current=page]:underline ${linkClass}`}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

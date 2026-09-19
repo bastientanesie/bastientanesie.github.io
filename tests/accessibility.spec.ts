@@ -18,16 +18,19 @@ for (const colorScheme of ["light", "dark"] as const) {
   });
 }
 
-test("open mobile menu has no detectable accessibility violations", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 375, height: 700 });
-  await page.goto("/");
-  await page.getByRole("button", { name: "Menu" }).click();
+for (const colorScheme of ["light", "dark"] as const) {
+  test(`open mobile menu has no detectable accessibility violations (${colorScheme})`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme });
+    await page.setViewportSize({ width: 375, height: 700 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Menu" }).click();
 
-  const { violations } = await new AxeBuilder({ page })
-    .withTags(wcagTags)
-    .analyze();
+    const { violations } = await new AxeBuilder({ page })
+      .withTags(wcagTags)
+      .analyze();
 
-  expect(violations).toEqual([]);
-});
+    expect(violations).toEqual([]);
+  });
+}

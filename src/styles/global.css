@@ -11,6 +11,16 @@
   --color-focus: var(--focus);
 }
 
+@utility page-container {
+  margin-inline: auto;
+  max-width: 2560px;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+}
+
 :root {
   color-scheme: light dark;
   --surface: #ffffff;
