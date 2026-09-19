@@ -8,7 +8,7 @@ INSTALL_STAMP := .make/installed
 PLAYWRIGHT_INSTALL_STAMP := .make/installed-playwright
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build test check lint format format-check clean
+.PHONY: help install dev build test check lint format format-check icons clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -48,6 +48,9 @@ format: install ## Format the code with Prettier
 
 format-check: install ## Verify formatting with Prettier
 	$(NODE) npm run format:check
+
+icons: install ## Regenerate the committed PNG icons from public/favicon.svg
+	$(NODE) npm run icons
 
 clean: ## Remove containers, volumes and build output
 	$(COMPOSE) down --volumes --remove-orphans
