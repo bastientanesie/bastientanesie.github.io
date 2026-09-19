@@ -1,3 +1,1 @@
-import type { Alpine } from "alpinejs";
-
-export default (_Alpine: Alpine) => {};
+export default (): undefined => undefined;

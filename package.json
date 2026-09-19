@@ -9,7 +9,11 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "eslint --max-warnings 0 .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@alpinejs/csp": "^3.17.3",
@@ -21,6 +25,13 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@types/alpinejs": "^3.13.11"
+    "@astrojs/check": "^0.9.10",
+    "@eslint/js": "^10.0.1",
+    "@types/alpinejs": "^3.13.11",
+    "eslint": "^10.11.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "prettier": "^3.9.8",
+    "prettier-plugin-astro": "^1.0.1",
+    "typescript-eslint": "^8.70.0"
   }
 }

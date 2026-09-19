@@ -6,7 +6,7 @@ NODE := $(COMPOSE) run --rm node
 INSTALL_STAMP := .make/installed
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build clean
+.PHONY: help install dev build check lint format clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -24,6 +24,15 @@ dev: install ## Serve the site locally on http://localhost:4321
 
 build: install ## Build the static site into dist/
 	$(NODE) npm run build
+
+check: install ## Type-check the project with astro check
+	$(NODE) npm run check
+
+lint: install ## Lint with ESLint (no warnings allowed)
+	$(NODE) npm run lint
+
+format: install ## Format the code with Prettier
+	$(NODE) npm run format
 
 clean: ## Remove containers, volumes and build output
 	$(COMPOSE) down --volumes --remove-orphans
