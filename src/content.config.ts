@@ -3,11 +3,21 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { postTags } from "./data/tags";
 
+const KEBAB_CASE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+function postIdFromEntry(entry: string): string {
+  const id = entry.split("/")[0] ?? entry;
+  if (!KEBAB_CASE.test(id)) {
+    throw new Error(`Post folder "${id}" must be kebab-case`);
+  }
+  return id;
+}
+
 const posts = defineCollection({
   loader: glob({
     pattern: "*/index.md",
     base: "./src/content/posts",
-    generateId: ({ entry }) => entry.split("/")[0] ?? entry,
+    generateId: ({ entry }) => postIdFromEntry(entry),
   }),
   schema: ({ image }) =>
     z.object({

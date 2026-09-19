@@ -1,0 +1,19 @@
+---
+import { formatIsoDate, readingTimeMinutes, type Post } from "../../lib/posts";
+import AiBadge from "./AiBadge.astro";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { publishedAt, aiAssisted } = post.data;
+---
+
+<p class="text-muted text-sm">
+  <time datetime={formatIsoDate(publishedAt)}>
+    {formatIsoDate(publishedAt)}
+  </time>
+  · {readingTimeMinutes(post)} min read
+  {aiAssisted && <AiBadge />}
+</p>

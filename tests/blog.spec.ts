@@ -52,4 +52,10 @@ test.describe("blog", () => {
       page.locator("pre.astro-code span[style*='color']").first(),
     ).toBeVisible();
   });
+
+  test("reading time ignores code blocks", async ({ page }) => {
+    await page.goto("/blog/code-heavy/");
+
+    await expect(page.getByText("1 min read")).toBeVisible();
+  });
 });

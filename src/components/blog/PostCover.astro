@@ -1,0 +1,23 @@
+---
+import { Picture } from "astro:assets";
+import type { Post } from "../../lib/posts";
+
+interface Props {
+  post: Post;
+  class?: string;
+}
+
+const { post, class: className } = Astro.props;
+const { cover } = post.data;
+---
+
+{cover && (
+  <Picture
+    src={cover.image}
+    alt={cover.alt}
+    widths={[480, 720, 1080]}
+    sizes="(min-width: 48rem) 720px, 100vw"
+    formats={["avif", "webp"]}
+    class:list={["rounded", className]}
+  />
+)}
