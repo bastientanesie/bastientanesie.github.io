@@ -6,7 +6,7 @@ NODE := $(COMPOSE) run --rm node
 INSTALL_STAMP := .make/installed
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build check lint format clean
+.PHONY: help install dev build check lint format format-check clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -33,6 +33,9 @@ lint: install ## Lint with ESLint (no warnings allowed)
 
 format: install ## Format the code with Prettier
 	$(NODE) npm run format
+
+format-check: install ## Verify formatting with Prettier
+	$(NODE) npm run format:check
 
 clean: ## Remove containers, volumes and build output
 	$(COMPOSE) down --volumes --remove-orphans

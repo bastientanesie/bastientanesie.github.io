@@ -1,0 +1,18 @@
+# Deployment
+
+The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make` target (`check`, `lint`, `format-check`, `build`), then a `deploy` job that publishes the `dist/` artifact to GitHub Pages. `deploy` only runs on pushes to the repository's default branch.
+
+## GitHub settings
+
+- **Settings → Pages → Source**: `GitHub Actions`.
+- **Settings → Pages → Custom domain**: `bastien.tanesie.fr` (no `CNAME` file needed with the Actions source). Enforce HTTPS once the certificate is issued.
+
+## DNS
+
+At the registrar, add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`. `bastientanesie.github.io` then redirects to the custom domain automatically.
+
+## Workflow conventions
+
+- Actions are pinned by commit SHA (version in a trailing comment).
+- Workflow permissions default to none; each job declares the minimum it needs.
+- The npm cache is a directory (`NPM_CACHE_DIR`) mounted into the container at `/npm-cache` and restored with `actions/cache`.

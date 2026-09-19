@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/app
       - node_modules:/app/node_modules
-      - npm_cache:/npm-cache
+      - ${NPM_CACHE_DIR:-npm_cache}:/npm-cache
 
   playwright:
     <<: *common
@@ -23,7 +23,7 @@ services:
     volumes:
       - .:/app
       - node_modules_playwright:/app/node_modules
-      - npm_cache:/npm-cache
+      - ${NPM_CACHE_DIR:-npm_cache}:/npm-cache
 
 volumes:
   node_modules:
