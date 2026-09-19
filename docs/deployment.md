@@ -19,4 +19,4 @@ DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` po
 
 ## Default branch
 
-The `deploy` job only fires on the repository's default branch, and `push` runs are limited to `astro` and `main`. Until `astro` is promoted to `main` and set as default (after `master` is renamed to `legacy`), nothing is deployed.
+The `deploy` job only fires on the repository's default branch (`main`), and `push` runs are limited to it. Pull requests run every job except `deploy`.
