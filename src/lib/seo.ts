@@ -4,6 +4,14 @@ import type { Project } from "./projects";
 
 export const SITE_NAME = "Bastien Tanésie";
 
+export const SITEMAP_PATH = "/sitemap-index.xml";
+
+export function textResponse(body: string): Response {
+  return new Response(body, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
+}
+
 export type JsonLdNode = Record<string, unknown>;
 
 export type PageType = "WebPage" | "CollectionPage" | "ProfilePage";

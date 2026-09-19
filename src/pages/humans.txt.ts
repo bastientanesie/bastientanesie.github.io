@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { profiles } from "../data/site";
-import { SITE_NAME } from "../lib/seo";
+import { SITE_NAME, textResponse } from "../lib/seo";
 
 export const GET: APIRoute = () => {
   const contacts = profiles
@@ -15,7 +15,5 @@ Language: English
 Standards: HTML5, CSS3
 Components: Astro, Tailwind CSS, Alpine.js
 `;
-  return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
-  });
+  return textResponse(body);
 };

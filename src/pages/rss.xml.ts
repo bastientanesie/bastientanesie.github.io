@@ -8,7 +8,7 @@ export const GET: APIRoute = async ({ site }) => {
   return rss({
     title: `${SITE_NAME} — Blog`,
     description: `Posts by ${SITE_NAME}.`,
-    site: site ?? "",
+    site: new URL("/", site).href,
     items: posts.map(({ id, data }) => ({
       title: data.title,
       description: data.description,

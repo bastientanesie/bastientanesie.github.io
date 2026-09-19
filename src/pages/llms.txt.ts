@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { navigation } from "../data/site";
 import { getPublishedPosts } from "../lib/posts";
 import { getPublishedProjects } from "../lib/projects";
-import { SITE_NAME } from "../lib/seo";
+import { SITE_NAME, SITEMAP_PATH, textResponse } from "../lib/seo";
 
 export const GET: APIRoute = async ({ site }) => {
   const link = (label: string, path: string, description?: string) =>
@@ -37,9 +37,7 @@ ${posts.join("\n")}
 ## Optional
 
 ${link("RSS feed", "/rss.xml")}
-${link("Sitemap", "/sitemap-index.xml")}
+${link("Sitemap", SITEMAP_PATH)}
 `;
-  return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
-  });
+  return textResponse(body);
 };

@@ -16,6 +16,8 @@ const pages = [
   { path: "/blog/", type: "CollectionPage" },
   { path: "/blog/tags/web/", type: "CollectionPage" },
   { path: "/projects/", type: "CollectionPage" },
+  { path: "/blog/tags/", type: "CollectionPage" },
+  { path: "/projects/tags/", type: "CollectionPage" },
   { path: "/blog/hello-world/", type: "WebPage" },
   { path: "/projects/sample-project/", type: "WebPage" },
 ];
@@ -101,7 +103,7 @@ test.describe("generated files", () => {
     expect(sitemap).toContain("https://bastien.tanesie.fr/blog/hello-world/");
     expect(sitemap).not.toContain("unpublished-draft");
     expect(sitemap).not.toContain("unpublished-project");
-    expect(sitemap).not.toContain("404");
+    expect(sitemap).not.toContain("/404");
   });
 
   test("llms.txt describes the site and lists published content", async ({
