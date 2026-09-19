@@ -10,6 +10,7 @@
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
     "astro": "astro",
+    "preview": "astro preview --host 0.0.0.0",
     "check": "astro check",
     "lint": "eslint --max-warnings 0 .",
     "format": "prettier --write .",
@@ -26,7 +27,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "4.13.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.63.0",
     "@types/alpinejs": "^3.13.11",
     "eslint": "^10.11.0",
     "eslint-plugin-astro": "^3.2.1",

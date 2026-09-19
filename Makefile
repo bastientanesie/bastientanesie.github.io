@@ -3,10 +3,12 @@ export HOST_GID := $(shell id -g)
 
 COMPOSE := docker compose
 NODE := $(COMPOSE) run --rm node
+PLAYWRIGHT := $(COMPOSE) run --rm playwright
 INSTALL_STAMP := .make/installed
+PLAYWRIGHT_INSTALL_STAMP := .make/installed-playwright
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build check lint format format-check clean
+.PHONY: help install dev build test check lint format format-check clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -24,6 +26,15 @@ dev: install ## Serve the site locally on http://localhost:4321
 
 build: install ## Build the static site into dist/
 	$(NODE) npm run build
+
+$(PLAYWRIGHT_INSTALL_STAMP): package.json package-lock.json
+	@mkdir -p $(dir $@)
+	$(COMPOSE) run --rm --user root playwright chown $(HOST_UID):$(HOST_GID) /app/node_modules /npm-cache
+	$(PLAYWRIGHT) npm ci
+	@touch $@
+
+test: build $(PLAYWRIGHT_INSTALL_STAMP) ## Serve the build and run Playwright + axe
+	$(PLAYWRIGHT) npx playwright test
 
 check: install ## Type-check the project with astro check
 	$(NODE) npm run check
