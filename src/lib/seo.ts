@@ -1,8 +1,8 @@
-import { profiles } from "../data/site";
+import { profiles, SITE_NAME } from "../data/site";
 import type { Post } from "./posts";
 import type { Project } from "./projects";
 
-export const SITE_NAME = "Bastien Tanésie";
+export { SITE_NAME } from "../data/site";
 
 export const SITEMAP_PATH = "/sitemap-index.xml";
 
@@ -15,6 +15,16 @@ export function textResponse(body: string): Response {
 export type JsonLdNode = Record<string, unknown>;
 
 export type PageType = "WebPage" | "CollectionPage" | "ProfilePage";
+
+export interface SeoProps {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  pageType?: PageType | undefined;
+  nodes?: JsonLdNode[] | undefined;
+  image?: string | undefined;
+  ogType?: "website" | "article";
+}
 
 interface GraphOptions {
   site: URL;

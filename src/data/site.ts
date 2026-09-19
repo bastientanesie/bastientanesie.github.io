@@ -1,3 +1,5 @@
+export const SITE_NAME = "Bastien Tanésie";
+
 export const navigation = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about/" },
