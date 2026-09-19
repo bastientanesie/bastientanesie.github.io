@@ -5,20 +5,21 @@ import ProjectMeta from "./ProjectMeta.astro";
 
 interface Props {
   project: Project;
+  headingLevel?: "h2" | "h3";
 }
 
-const { project } = Astro.props;
+const { project, headingLevel: Heading = "h2" } = Astro.props;
 const { title, description } = project.data;
 ---
 
 <article class="relative flex gap-4 rounded-md border border-border p-4">
   <ProjectLogo project={project} class="shrink-0" />
   <div>
-    <h2 class="text-xl font-semibold">
+    <Heading class="text-xl font-semibold">
       <a href={`/projects/${project.id}/`} class="after:absolute after:inset-0">
         {title}
       </a>
-    </h2>
+    </Heading>
     <ProjectMeta project={project} />
     <p class="mt-2">{description}</p>
   </div>

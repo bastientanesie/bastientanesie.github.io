@@ -5,19 +5,20 @@ import PostMeta from "./PostMeta.astro";
 
 interface Props {
   post: Post;
+  headingLevel?: "h2" | "h3";
 }
 
-const { post } = Astro.props;
+const { post, headingLevel: Heading = "h2" } = Astro.props;
 const { title, description } = post.data;
 ---
 
 <article class="relative rounded-md border border-border p-4">
   <PostCover post={post} class="mb-3" />
-  <h2 class="text-xl font-semibold">
+  <Heading class="text-xl font-semibold">
     <a href={`/blog/${post.id}/`} class="after:absolute after:inset-0">
       {title}
     </a>
-  </h2>
+  </Heading>
   <PostMeta post={post} />
   <p class="mt-2">{description}</p>
 </article>
