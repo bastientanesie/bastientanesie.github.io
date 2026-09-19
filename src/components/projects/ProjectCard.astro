@@ -1,0 +1,25 @@
+---
+import type { Project } from "../../lib/projects";
+import ProjectLogo from "./ProjectLogo.astro";
+import ProjectMeta from "./ProjectMeta.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, description } = project.data;
+---
+
+<article class="relative flex gap-4 rounded-md border border-border p-4">
+  <ProjectLogo project={project} class="shrink-0" />
+  <div>
+    <h2 class="text-xl font-semibold">
+      <a href={`/projects/${project.id}/`} class="after:absolute after:inset-0">
+        {title}
+      </a>
+    </h2>
+    <ProjectMeta project={project} />
+    <p class="mt-2">{description}</p>
+  </div>
+</article>

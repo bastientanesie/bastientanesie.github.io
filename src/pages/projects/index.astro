@@ -1,0 +1,21 @@
+---
+import ProjectCard from "../../components/projects/ProjectCard.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getPublishedProjects } from "../../lib/projects";
+
+const projects = await getPublishedProjects();
+---
+
+<PageLayout
+  title="Projects | Bastien Tanésie"
+  description="Projects carried out by Bastien Tanésie."
+>
+  <h1 class="mb-6 text-3xl font-bold">Projects</h1>
+  <ul class="space-y-4">
+    {projects.map((project) => (
+      <li>
+        <ProjectCard project={project} />
+      </li>
+    ))}
+  </ul>
+</PageLayout>

@@ -1,0 +1,13 @@
+---
+import { formatPeriod, type Project } from "../../lib/projects";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<p class="text-muted text-sm">
+  {project.data.role} · {formatPeriod(project)}
+</p>
