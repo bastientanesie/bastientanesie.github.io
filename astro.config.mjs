@@ -7,6 +7,10 @@ import { headingAnchors } from "./src/plugins/heading-anchors";
 export default defineConfig({
   site: "https://bastien.tanesie.fr",
   markdown: {
+    shikiConfig: {
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+    },
     processor: satteri({
       hastPlugins: [satteriHeadingIdsPlugin(), headingAnchors],
     }),

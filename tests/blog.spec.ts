@@ -49,7 +49,7 @@ test.describe("blog", () => {
 
     await expect(page.locator("pre.astro-code")).toBeVisible();
     await expect(
-      page.locator("pre.astro-code span[style*='color']").first(),
+      page.locator("pre.astro-code span[style*='--shiki-light']").first(),
     ).toBeVisible();
   });
 
@@ -57,5 +57,48 @@ test.describe("blog", () => {
     await page.goto("/blog/code-heavy/");
 
     await expect(page.getByText("1 min read")).toBeVisible();
+  });
+
+  test("heading anchors are visible without hover on touch viewports", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 700 });
+    await page.goto("/blog/hello-world/");
+
+    await expect(
+      page.locator("h2#first-section .heading-anchor"),
+    ).toBeVisible();
+    await expect(page.locator("h2#first-section .heading-anchor")).toHaveCSS(
+      "opacity",
+      "1",
+    );
+  });
+
+  for (const [colorScheme, background] of [
+    ["light", "rgb(255, 255, 255)"],
+    ["dark", "rgb(36, 41, 46)"],
+  ] as const) {
+    test(`code block follows the ${colorScheme} theme`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme });
+      await page.goto("/blog/hello-world/");
+
+      await expect(page.locator("pre.astro-code")).toHaveCSS(
+        "background-color",
+        background,
+      );
+    });
+  }
+
+  test("code block follows the theme chosen with the switcher", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto("/blog/hello-world/");
+    await page.getByLabel("Dark").check({ force: true });
+
+    await expect(page.locator("pre.astro-code")).toHaveCSS(
+      "background-color",
+      "rgb(36, 41, 46)",
+    );
   });
 });
