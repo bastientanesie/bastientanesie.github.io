@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { SITE_NAME } from "../src/data/site";
 
 const icons = [
   { path: "/apple-touch-icon.png", size: 180 },
@@ -43,7 +44,7 @@ test.describe("icons", () => {
       icons: { src: string; sizes: string; type: string }[];
     };
 
-    expect(manifest.name).toBe("Bastien Tanésie");
+    expect(manifest.name).toBe(SITE_NAME);
     expect(manifest.icons).toEqual([
       { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
