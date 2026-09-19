@@ -102,3 +102,24 @@ test.describe("blog", () => {
     );
   });
 });
+
+test.describe("responsive images", () => {
+  test("Post cover is served in 480/720/1080 widths", async ({ page }) => {
+    await page.goto("/blog/hello-world/");
+
+    const sources = page.locator("article picture source");
+    const srcsets = await sources.evaluateAll((els) =>
+      els.map((el) => el.getAttribute("srcset") ?? ""),
+    );
+    expect(srcsets.length).toBeGreaterThan(0);
+    for (const srcset of srcsets) {
+      expect(srcset).toMatch(/480w.*720w.*1080w/s);
+    }
+  });
+
+  test("Post without cover has no visual", async ({ page }) => {
+    await page.goto("/blog/code-heavy/");
+
+    await expect(page.locator("article img")).toHaveCount(0);
+  });
+});
