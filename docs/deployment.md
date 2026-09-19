@@ -23,7 +23,7 @@ The `deploy` job only fires on the repository's default branch (`main`), and `pu
 
 ## Content Security Policy
 
-GitHub Pages cannot set custom HTTP headers, so the CSP is delivered as a `<meta http-equiv="content-security-policy">` tag, generated at build time by Astro (`security.csp` in `astro.config.mjs`). Inline scripts and styles are allowed by SHA-256 hash, never by `'unsafe-inline'`. Alpine runs from `@alpinejs/csp`, so no `'unsafe-eval'` is needed. `tests/csp.spec.ts` checks every page for the policy and for violations.
+GitHub Pages cannot set custom HTTP headers, so the CSP is delivered as a `<meta http-equiv="content-security-policy">` tag, generated at build time by Astro (`security.csp` in `astro.config.mjs`). Inline scripts and styles are allowed by SHA-256 hash, never by `'unsafe-inline'` for scripts or `<style>` elements. Alpine runs from `@alpinejs/csp`, so no `'unsafe-eval'` is needed. `tests/csp.spec.ts` checks every page for the policy and for violations.
 
 Known limits of the `<meta>` delivery on Pages:
 
