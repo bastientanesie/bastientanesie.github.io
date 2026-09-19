@@ -10,9 +10,17 @@ interface Props {
   noindex?: boolean;
   pageType?: PageType | undefined;
   nodes?: JsonLdNode[] | undefined;
+  image?: string | undefined;
 }
 
-const { title, description, noindex = false, pageType, nodes } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  pageType,
+  nodes,
+  image,
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -21,6 +29,7 @@ const { title, description, noindex = false, pageType, nodes } = Astro.props;
   noindex={noindex}
   pageType={pageType}
   nodes={nodes}
+  image={image}
 >
   <a
     href="#main"

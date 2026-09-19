@@ -138,3 +138,43 @@ test.describe("generated files", () => {
     expect(body).not.toContain("content:encoded");
   });
 });
+
+test.describe("Open Graph images", () => {
+  const cases = [
+    { path: "/blog/hello-world/", image: "/og/blog/hello-world.png" },
+    {
+      path: "/projects/sample-project/",
+      image: "/og/projects/sample-project.png",
+    },
+  ];
+
+  for (const { path, image } of cases) {
+    test(`${path} references its own generated image`, async ({
+      page,
+      request,
+    }) => {
+      await page.goto(path);
+
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+        "content",
+        `https://bastien.tanesie.fr${image}`,
+      );
+      const response = await request.get(image);
+      expect(response.headers()["content-type"]).toBe("image/png");
+    });
+  }
+
+  test("other pages reference the default image", async ({ page, request }) => {
+    await page.goto("/about/");
+
+    const content = await page
+      .locator('meta[property="og:image"]')
+      .getAttribute("content");
+    expect(content).toMatch(
+      /^https:\/\/bastien\.tanesie\.fr\/_astro\/.+\.png$/,
+    );
+    const path = new URL(content ?? "").pathname;
+    const response = await request.get(path);
+    expect(response.headers()["content-type"]).toBe("image/png");
+  });
+});
