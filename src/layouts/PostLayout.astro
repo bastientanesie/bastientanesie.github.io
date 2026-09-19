@@ -4,6 +4,7 @@ import PostCover from "../components/blog/PostCover.astro";
 import PostMeta from "../components/blog/PostMeta.astro";
 import TableOfContents from "../components/blog/TableOfContents.astro";
 import type { Post } from "../lib/posts";
+import { buildPostNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
 interface Props {
@@ -13,9 +14,14 @@ interface Props {
 
 const { post, headings } = Astro.props;
 const { title, description, tags } = post.data;
+const nodes = [buildPostNode(post, resolveSite(Astro))];
 ---
 
-<PageLayout title={`${title} | Bastien Tanésie`} description={description}>
+<PageLayout
+  title={`${title} | Bastien Tanésie`}
+  description={description}
+  nodes={nodes}
+>
   <article class="mx-auto max-w-3xl">
     <header class="mb-6">
       <h1 class="text-3xl font-bold">{title}</h1>

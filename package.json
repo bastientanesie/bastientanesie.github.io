@@ -19,6 +19,8 @@
   "dependencies": {
     "@alpinejs/csp": "^3.17.3",
     "@astrojs/alpinejs": "^1.0.0",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "alpinejs": "^3.17.3",
     "astro": "^7.3.3",

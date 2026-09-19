@@ -2,6 +2,7 @@
 import ProjectLogo from "../components/projects/ProjectLogo.astro";
 import ProjectMeta from "../components/projects/ProjectMeta.astro";
 import type { Project } from "../lib/projects";
+import { buildProjectNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
 interface Props {
@@ -10,9 +11,14 @@ interface Props {
 
 const { project } = Astro.props;
 const { title, description, tags } = project.data;
+const nodes = [buildProjectNode(project, resolveSite(Astro))];
 ---
 
-<PageLayout title={`${title} | Bastien Tanésie`} description={description}>
+<PageLayout
+  title={`${title} | Bastien Tanésie`}
+  description={description}
+  nodes={nodes}
+>
   <article class="mx-auto max-w-3xl">
     <header class="mb-6 flex items-center gap-4">
       <ProjectLogo project={project} class="shrink-0" />
