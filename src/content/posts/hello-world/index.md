@@ -3,6 +3,9 @@ title: Hello, world
 description: A sample Post that exercises the Post pipeline.
 publishedAt: 2026-01-15
 tags: [web, tooling]
+cover:
+  image: ./cover.png
+  alt: Sample cover
 aiAssisted: true
 ---
 

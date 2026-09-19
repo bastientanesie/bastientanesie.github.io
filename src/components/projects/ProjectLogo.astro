@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import type { Project } from "../../lib/projects";
 
 interface Props {
@@ -9,12 +9,25 @@ interface Props {
 
 const { project, class: className } = Astro.props;
 const { logo } = project.data;
+const classes = ["size-16 rounded object-contain", className];
 ---
 
-<Image
-  src={logo.image}
-  alt={logo.alt}
-  width={64}
-  height={64}
-  class:list={["rounded", className]}
-/>
+{logo.image.format === "svg" ? (
+  <Image
+    src={logo.image}
+    alt={logo.alt}
+    format="svg"
+    width={64}
+    height={64}
+    class:list={classes}
+  />
+) : (
+  <Picture
+    src={logo.image}
+    alt={logo.alt}
+    widths={[480, 720, 1080]}
+    sizes="64px"
+    formats={["avif", "webp"]}
+    class:list={classes}
+  />
+)}

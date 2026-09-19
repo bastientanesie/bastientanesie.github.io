@@ -6,7 +6,7 @@ startedAt: 2023-03
 endedAt: 2024-06
 tags: [web, backend]
 logo:
-  image: ./logo.svg
+  image: ./logo.png
   alt: Sample logo
 isFeatured: true
 ---

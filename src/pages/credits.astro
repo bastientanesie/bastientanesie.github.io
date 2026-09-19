@@ -1,0 +1,32 @@
+---
+import { creditCategories } from "../data/credits";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="Credits | Bastien Tanésie"
+  description="Tools, libraries and services this site relies on."
+>
+  <h1 class="text-3xl font-bold">Credits</h1>
+  {creditCategories.map((category) => (
+    <section class="mt-8" aria-labelledby={`credits-${category.title}`}>
+      <h2 id={`credits-${category.title}`} class="text-xl font-semibold">
+        {category.title}
+      </h2>
+      <ul class="mt-3 space-y-2">
+        {category.credits.map((credit) => (
+          <li>
+            <a
+              href={credit.href}
+              rel="noopener"
+              class="underline underline-offset-4"
+            >
+              {credit.name}
+            </a>
+            <span class="text-muted"> — {credit.description}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</PageLayout>
