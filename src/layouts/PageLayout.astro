@@ -1,18 +1,27 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import type { JsonLdNode, PageType } from "../lib/seo";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  pageType?: PageType | undefined;
+  nodes?: JsonLdNode[] | undefined;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, pageType, nodes } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} noindex={noindex}>
+<BaseLayout
+  title={title}
+  description={description}
+  noindex={noindex}
+  pageType={pageType}
+  nodes={nodes}
+>
   <a
     href="#main"
     data-print-hidden

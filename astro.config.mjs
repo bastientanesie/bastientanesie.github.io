@@ -1,4 +1,5 @@
 import alpinejs from "@astrojs/alpinejs";
+import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
@@ -15,7 +16,7 @@ export default defineConfig({
       hastPlugins: [satteriHeadingIdsPlugin(), headingAnchors],
     }),
   },
-  integrations: [alpinejs({ entrypoint: "/src/alpine" })],
+  integrations: [alpinejs({ entrypoint: "/src/alpine" }), sitemap()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
