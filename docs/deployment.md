@@ -9,7 +9,7 @@ The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make
 
 ## DNS
 
-At the registrar, add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`. `bastientanesie.github.io` then redirects to the custom domain automatically.
+DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`, with the proxy **disabled** (grey cloud, "DNS only"). If proxied, GitHub cannot validate the domain or issue the HTTPS certificate. `bastientanesie.github.io` then redirects to the custom domain automatically.
 
 ## Workflow conventions
 
