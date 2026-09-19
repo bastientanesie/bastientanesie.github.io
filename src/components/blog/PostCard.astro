@@ -1,0 +1,38 @@
+---
+import { Picture } from "astro:assets";
+import { readingTimeMinutes, type Post } from "../../lib/posts";
+import AiBadge from "./AiBadge.astro";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, publishedAt, cover, aiAssisted } = post.data;
+---
+
+<article class="relative rounded-md border border-border p-4">
+  {cover && (
+    <Picture
+      src={cover.image}
+      alt={cover.alt}
+      widths={[480, 720, 1080]}
+      sizes="(min-width: 48rem) 720px, 100vw"
+      formats={["avif", "webp"]}
+      class="mb-3 rounded"
+    />
+  )}
+  <h2 class="text-xl font-semibold">
+    <a href={`/blog/${post.id}/`} class="after:absolute after:inset-0">
+      {title}
+    </a>
+  </h2>
+  <p class="text-muted text-sm">
+    <time datetime={publishedAt.toISOString()}>
+      {publishedAt.toISOString().slice(0, 10)}
+    </time>
+    · {readingTimeMinutes(post.body)} min read
+    {aiAssisted && <AiBadge />}
+  </p>
+  <p class="mt-2">{description}</p>
+</article>

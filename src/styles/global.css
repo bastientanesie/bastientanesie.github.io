@@ -113,3 +113,26 @@ body {
     break-inside: avoid;
   }
 }
+
+.prose-post :is(h2, h3, h4) {
+  scroll-margin-top: 1rem;
+  font-weight: 700;
+}
+
+.prose-post h2 {
+  font-size: 1.5rem;
+}
+
+.prose-post h3 {
+  font-size: 1.25rem;
+}
+
+.heading-anchor {
+  margin-inline-start: 0.5rem;
+  opacity: 0;
+}
+
+:is(h2, h3, h4):hover > .heading-anchor,
+.heading-anchor:focus {
+  opacity: 1;
+}

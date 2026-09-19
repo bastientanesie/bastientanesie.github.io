@@ -1,0 +1,21 @@
+---
+import PostCard from "../../components/blog/PostCard.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getPublishedPosts } from "../../lib/posts";
+
+const posts = await getPublishedPosts();
+---
+
+<PageLayout
+  title="Blog | Bastien Tanésie"
+  description="Posts by Bastien Tanésie."
+>
+  <h1 class="mb-6 text-3xl font-bold">Blog</h1>
+  <ul class="space-y-4">
+    {posts.map((post) => (
+      <li>
+        <PostCard post={post} />
+      </li>
+    ))}
+  </ul>
+</PageLayout>

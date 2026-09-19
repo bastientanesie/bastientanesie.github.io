@@ -3,19 +3,27 @@ import { expect, test } from "@playwright/test";
 
 const wcagTags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
-for (const colorScheme of ["light", "dark"] as const) {
-  test(`home page has no detectable accessibility violations (${colorScheme})`, async ({
-    page,
-  }) => {
-    await page.emulateMedia({ colorScheme });
-    await page.goto("/");
+const pages = [
+  { name: "home page", path: "/" },
+  { name: "blog list", path: "/blog/" },
+  { name: "Post page", path: "/blog/hello-world/" },
+];
 
-    const { violations } = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
+for (const { name, path } of pages) {
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`${name} has no detectable accessibility violations (${colorScheme})`, async ({
+      page,
+    }) => {
+      await page.emulateMedia({ colorScheme });
+      await page.goto(path);
 
-    expect(violations).toEqual([]);
-  });
+      const { violations } = await new AxeBuilder({ page })
+        .withTags(wcagTags)
+        .analyze();
+
+      expect(violations).toEqual([]);
+    });
+  }
 }
 
 for (const colorScheme of ["light", "dark"] as const) {
