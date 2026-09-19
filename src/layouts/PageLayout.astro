@@ -1,0 +1,27 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <a
+    href="#main"
+    data-print-hidden
+    class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:bg-surface focus:px-3 focus:py-2"
+  >
+    Skip to content
+  </a>
+  <Header />
+  <main id="main" class="mx-auto max-w-[2560px] px-4 py-8 sm:px-6">
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

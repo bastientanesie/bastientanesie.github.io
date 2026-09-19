@@ -1,0 +1,36 @@
+---
+import { licenses, profiles } from "../data/site";
+---
+
+<footer class="mt-16 border-t border-border" data-print-hidden>
+  <div class="mx-auto flex max-w-[2560px] flex-col gap-4 px-4 py-8 text-sm sm:px-6 md:flex-row md:justify-between">
+    <nav aria-label="Profiles">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {profiles.map((profile) => (
+          <li>
+            <a
+              href={profile.href}
+              rel="me noopener"
+              class="underline underline-offset-4"
+            >
+              {profile.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <ul class="flex flex-wrap gap-x-6 gap-y-2 text-muted">
+      {licenses.map((license) => (
+        <li>
+          <a
+            href={license.href}
+            rel="license noopener"
+            class="underline underline-offset-4"
+          >
+            {license.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

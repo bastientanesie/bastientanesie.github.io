@@ -14,5 +14,10 @@ export default defineConfig(
       parserOptions: { project: true },
     },
   },
+  {
+    // Astro template expressions are not typed by the parser, so `.map()` in markup reads as `error`.
+    files: ["**/*.astro"],
+    rules: { "@typescript-eslint/no-unsafe-return": "off" },
+  },
   { linterOptions: { reportUnusedDisableDirectives: "error" } },
 );

@@ -1,0 +1,57 @@
+---
+import { themeColors } from "../data/site";
+---
+
+<script is:inline define:vars={{ themeColors }}>
+  (() => {
+    const storageKey = "theme";
+    const root = document.documentElement;
+
+    const readChoice = () => {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        return stored === "light" || stored === "dark" ? stored : "system";
+      } catch {
+        return "system";
+      }
+    };
+
+    const applyChoice = (choice) => {
+      if (choice === "system") {
+        root.removeAttribute("data-theme");
+      } else {
+        root.setAttribute("data-theme", choice);
+      }
+      document.querySelectorAll("meta[name=theme-color]").forEach((meta) => {
+        const scheme = meta.dataset.scheme;
+        meta.content =
+          choice === "system" ? themeColors[scheme] : themeColors[choice];
+      });
+    };
+
+    const saveChoice = (choice) => {
+      try {
+        if (choice === "system") localStorage.removeItem(storageKey);
+        else localStorage.setItem(storageKey, choice);
+      } catch {
+        return;
+      }
+    };
+
+    applyChoice(readChoice());
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const switcher = document.querySelector("[data-theme-switcher]");
+      if (!switcher) return;
+      const choice = readChoice();
+      switcher.hidden = false;
+      switcher.querySelectorAll("input[type=radio]").forEach((radio) => {
+        radio.checked = radio.value === choice;
+        radio.addEventListener("change", () => {
+          applyChoice(radio.value);
+          saveChoice(radio.value);
+        });
+      });
+    });
+  })();
+</script>

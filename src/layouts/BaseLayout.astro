@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import ThemeScript from "../components/ThemeScript.astro";
+import { themeColors } from "../data/site";
 
 interface Props {
   title: string;
@@ -16,8 +18,21 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta
+      name="theme-color"
+      content={themeColors.light}
+      media="(prefers-color-scheme: light)"
+      data-scheme="light"
+    />
+    <meta
+      name="theme-color"
+      content={themeColors.dark}
+      media="(prefers-color-scheme: dark)"
+      data-scheme="dark"
+    />
+    <ThemeScript />
   </head>
-  <body>
+  <body class="min-h-screen bg-surface text-content antialiased">
     <slot />
   </body>
 </html>
