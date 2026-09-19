@@ -15,4 +15,8 @@ At the registrar, add a `CNAME` record `bastien` pointing to `bastientanesie.git
 
 - Actions are pinned by commit SHA (version in a trailing comment).
 - Workflow permissions default to none; each job declares the minimum it needs.
-- The npm cache is a directory (`NPM_CACHE_DIR`) mounted into the container at `/npm-cache` and restored with `actions/cache`.
+- The npm cache is a directory (`NPM_CACHE_DIR`, `/tmp/npm-cache` in CI) mounted into the container at `/npm-cache` and restored with `actions/cache`.
+
+## Default branch
+
+The `deploy` job only fires on the repository's default branch, and `push` runs are limited to `astro` and `main`. Until `astro` is promoted to `main` and set as default (after `master` is renamed to `legacy`), nothing is deployed.
