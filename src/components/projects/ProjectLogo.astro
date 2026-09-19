@@ -9,7 +9,7 @@ interface Props {
 
 const { project, class: className } = Astro.props;
 const { logo } = project.data;
-const classes = ["size-16 rounded object-contain", className];
+const logoClasses = ["size-16 rounded object-contain", className];
 ---
 
 {logo.image.format === "svg" ? (
@@ -19,7 +19,7 @@ const classes = ["size-16 rounded object-contain", className];
     format="svg"
     width={64}
     height={64}
-    class:list={classes}
+    class:list={logoClasses}
   />
 ) : (
   <Picture
@@ -28,6 +28,6 @@ const classes = ["size-16 rounded object-contain", className];
     widths={[480, 720, 1080]}
     sizes="64px"
     formats={["avif", "webp"]}
-    class:list={classes}
+    class:list={logoClasses}
   />
 )}

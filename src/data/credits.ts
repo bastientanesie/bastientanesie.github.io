@@ -5,12 +5,14 @@ export interface Credit {
 }
 
 export interface CreditCategory {
+  id: string;
   title: string;
   credits: readonly Credit[];
 }
 
 export const creditCategories: readonly CreditCategory[] = [
   {
+    id: "frameworks-and-libraries",
     title: "Frameworks and libraries",
     credits: [
       {
@@ -36,6 +38,7 @@ export const creditCategories: readonly CreditCategory[] = [
     ],
   },
   {
+    id: "services",
     title: "Services",
     credits: [
       {
