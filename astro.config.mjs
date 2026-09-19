@@ -8,6 +8,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
+      // @astrojs/alpinejs imports "alpinejs" itself; this swaps in the CSP-safe build.
       alias: { alpinejs: "@alpinejs/csp" },
     },
   },
