@@ -8,8 +8,8 @@ export const OG_HEIGHT = 630;
 
 const FONT_DIRECTORY = resolve("node_modules/@fontsource/inter/files");
 
-const LIGHT_SURFACE = "#ffffff";
-const DARK_SURFACE = "#0f1115";
+const TEXT_COLOR = "#ffffff";
+const SURFACE_COLOR = "#0f1115";
 const MUTED = "#9aa3b2";
 
 interface OgImageContent {
@@ -55,8 +55,8 @@ export async function renderOgImage({
           width: "100%",
           height: "100%",
           padding: 80,
-          backgroundColor: DARK_SURFACE,
-          color: LIGHT_SURFACE,
+          backgroundColor: SURFACE_COLOR,
+          color: TEXT_COLOR,
           fontFamily: "Inter",
         },
         children: [
@@ -87,4 +87,17 @@ export async function renderOgImage({
     { width: OG_WIDTH, height: OG_HEIGHT, fonts: await loadFonts() },
   );
   return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
+export function ogImagePath(kind: "blog" | "projects", id: string): string {
+  return `/og/${kind}/${id}.png`;
+}
+
+export async function ogImageResponse(
+  content: OgImageContent,
+): Promise<Response> {
+  const image = await renderOgImage(content);
+  return new Response(new Uint8Array(image), {
+    headers: { "Content-Type": "image/png" },
+  });
 }

@@ -6,19 +6,11 @@ import {
   resolveSite,
   serializeJsonLd,
   SITE_NAME,
-  type JsonLdNode,
-  type PageType,
+  type SeoProps,
 } from "../lib/seo";
 import { OG_HEIGHT, OG_WIDTH } from "../lib/og-image";
 
-interface Props {
-  title: string;
-  description: string;
-  noindex?: boolean;
-  pageType?: PageType | undefined;
-  nodes?: JsonLdNode[] | undefined;
-  image?: string | undefined;
-}
+type Props = SeoProps;
 
 const {
   title,
@@ -27,6 +19,7 @@ const {
   pageType,
   nodes,
   image,
+  ogType = "website",
 } = Astro.props;
 
 const site = resolveSite(Astro);
@@ -56,10 +49,11 @@ const graph = noindex
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:locale" content="en" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content={String(OG_WIDTH)} />
 <meta property="og:image:height" content={String(OG_HEIGHT)} />
+<meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:card" content="summary_large_image" />
 {!noindex && <meta property="og:url" content={canonical.href} />}
 <link

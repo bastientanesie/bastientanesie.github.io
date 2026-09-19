@@ -2,6 +2,7 @@
 import ProjectLogo from "../components/projects/ProjectLogo.astro";
 import ProjectMeta from "../components/projects/ProjectMeta.astro";
 import type { Project } from "../lib/projects";
+import { ogImagePath } from "../lib/og-image";
 import { buildProjectNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
@@ -18,7 +19,7 @@ const nodes = [buildProjectNode(project, resolveSite(Astro))];
   title={`${title} | Bastien Tanésie`}
   description={description}
   nodes={nodes}
-  image={`/og/projects/${project.id}.png`}
+  image={ogImagePath("projects", project.id)}
 >
   <article class="mx-auto max-w-3xl">
     <header class="mb-6 flex items-center gap-4">

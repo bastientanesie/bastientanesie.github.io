@@ -159,10 +159,36 @@ test.describe("Open Graph images", () => {
         "content",
         `https://bastien.tanesie.fr${image}`,
       );
+      await expect(
+        page.locator('meta[property="og:image:width"]'),
+      ).toHaveAttribute("content", "1200");
+      await expect(
+        page.locator('meta[property="og:image:height"]'),
+      ).toHaveAttribute("content", "630");
+      await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+        "content",
+        "summary_large_image",
+      );
       const response = await request.get(image);
       expect(response.headers()["content-type"]).toBe("image/png");
     });
   }
+
+  test("a Post is an article and other pages are websites", async ({
+    page,
+  }) => {
+    await page.goto("/blog/hello-world/");
+    await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+      "content",
+      "article",
+    );
+
+    await page.goto("/about/");
+    await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+      "content",
+      "website",
+    );
+  });
 
   test("other pages reference the default image", async ({ page, request }) => {
     await page.goto("/about/");

@@ -4,6 +4,7 @@ import PostCover from "../components/blog/PostCover.astro";
 import PostMeta from "../components/blog/PostMeta.astro";
 import TableOfContents from "../components/blog/TableOfContents.astro";
 import type { Post } from "../lib/posts";
+import { ogImagePath } from "../lib/og-image";
 import { buildPostNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
@@ -21,7 +22,8 @@ const nodes = [buildPostNode(post, resolveSite(Astro))];
   title={`${title} | Bastien Tanésie`}
   description={description}
   nodes={nodes}
-  image={`/og/blog/${post.id}.png`}
+  image={ogImagePath("blog", post.id)}
+  ogType="article"
 >
   <article class="mx-auto max-w-3xl">
     <header class="mb-6">
