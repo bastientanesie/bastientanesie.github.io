@@ -2,7 +2,7 @@
 import ProjectLogo from "../components/projects/ProjectLogo.astro";
 import ProjectMeta from "../components/projects/ProjectMeta.astro";
 import type { Project } from "../lib/projects";
-import { absoluteUrl, type JsonLdNode } from "../lib/seo";
+import { buildProjectNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
 interface Props {
@@ -10,23 +10,8 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags, startedAt } = project.data;
-
-const site = Astro.site ?? new URL(Astro.url.origin);
-const url = absoluteUrl(`/projects/${project.id}/`, site);
-const nodes: JsonLdNode[] = [
-  {
-    "@type": "CreativeWork",
-    "@id": `${url}#project`,
-    mainEntityOfPage: { "@id": `${url}#webpage` },
-    name: title,
-    description,
-    dateCreated: startedAt,
-    keywords: tags,
-    inLanguage: "en",
-    creator: { "@id": absoluteUrl("/#person", site) },
-  },
-];
+const { title, description, tags } = project.data;
+const nodes = [buildProjectNode(project, resolveSite(Astro))];
 ---
 
 <PageLayout

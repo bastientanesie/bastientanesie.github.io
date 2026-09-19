@@ -4,7 +4,7 @@ import PostCover from "../components/blog/PostCover.astro";
 import PostMeta from "../components/blog/PostMeta.astro";
 import TableOfContents from "../components/blog/TableOfContents.astro";
 import type { Post } from "../lib/posts";
-import { absoluteUrl, type JsonLdNode } from "../lib/seo";
+import { buildPostNode, resolveSite } from "../lib/seo";
 import PageLayout from "./PageLayout.astro";
 
 interface Props {
@@ -13,25 +13,8 @@ interface Props {
 }
 
 const { post, headings } = Astro.props;
-const { title, description, tags, publishedAt, updatedAt } = post.data;
-
-const site = Astro.site ?? new URL(Astro.url.origin);
-const url = absoluteUrl(`/blog/${post.id}/`, site);
-const nodes: JsonLdNode[] = [
-  {
-    "@type": "BlogPosting",
-    "@id": `${url}#article`,
-    mainEntityOfPage: { "@id": `${url}#webpage` },
-    headline: title,
-    description,
-    datePublished: publishedAt.toISOString(),
-    dateModified: (updatedAt ?? publishedAt).toISOString(),
-    keywords: tags,
-    inLanguage: "en",
-    author: { "@id": absoluteUrl("/#person", site) },
-    publisher: { "@id": absoluteUrl("/#person", site) },
-  },
-];
+const { title, description, tags } = post.data;
+const nodes = [buildPostNode(post, resolveSite(Astro))];
 ---
 
 <PageLayout

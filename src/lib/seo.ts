@@ -1,4 +1,6 @@
 import { profiles } from "../data/site";
+import type { Post } from "./posts";
+import type { Project } from "./projects";
 
 export const SITE_NAME = "Bastien Tanésie";
 
@@ -65,4 +67,49 @@ export function buildJsonLdGraph({
 
 export function serializeJsonLd(graph: JsonLdNode): string {
   return JSON.stringify(graph).replaceAll("<", "\\u003c");
+}
+
+export function resolveSite({
+  site,
+  url,
+}: {
+  site?: URL | undefined;
+  url: URL;
+}): URL {
+  return site ?? new URL(url.origin);
+}
+
+export function buildPostNode(post: Post, site: URL): JsonLdNode {
+  const { title, description, tags, publishedAt, updatedAt } = post.data;
+  const url = absoluteUrl(`/blog/${post.id}/`, site);
+  const personId = absoluteUrl("/#person", site);
+  return {
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    headline: title,
+    description,
+    datePublished: publishedAt.toISOString(),
+    dateModified: (updatedAt ?? publishedAt).toISOString(),
+    keywords: tags,
+    inLanguage: "en",
+    author: { "@id": personId },
+    publisher: { "@id": personId },
+  };
+}
+
+export function buildProjectNode(project: Project, site: URL): JsonLdNode {
+  const { title, description, tags, startedAt } = project.data;
+  const url = absoluteUrl(`/projects/${project.id}/`, site);
+  return {
+    "@type": "CreativeWork",
+    "@id": `${url}#project`,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    name: title,
+    description,
+    dateCreated: startedAt,
+    keywords: tags,
+    inLanguage: "en",
+    creator: { "@id": absoluteUrl("/#person", site) },
+  };
 }
