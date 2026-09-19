@@ -24,7 +24,8 @@ $(INSTALL_STAMP): package.json package-lock.json
 dev: install ## Serve the site locally on http://localhost:4321
 	$(COMPOSE) run --rm --service-ports node npm run dev
 
-build: install ## Build the static site into dist/
+build: install ## Regenerate the default Open Graph image, then build the static site into dist/
+	$(NODE) npm run og:default
 	$(NODE) npm run build
 
 $(PLAYWRIGHT_INSTALL_STAMP): package.json package-lock.json

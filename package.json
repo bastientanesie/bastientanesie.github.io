@@ -14,7 +14,8 @@
     "check": "astro check",
     "lint": "astro sync && eslint --max-warnings 0 .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "og:default": "node scripts/generate-og-default.ts"
   },
   "dependencies": {
     "@alpinejs/csp": "^3.17.3",
@@ -26,6 +27,7 @@
     "alpinejs": "^3.17.3",
     "astro": "^7.3.3",
     "satori": "^0.33.4",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },
