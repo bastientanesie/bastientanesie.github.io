@@ -24,15 +24,20 @@ test.describe("projects", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Sample project",
     );
-    await expect(page.getByText("Lead developer")).toBeVisible();
-    await expect(page.getByText("2023-03 – 2024-06")).toBeVisible();
-    await expect(page.getByText("#web")).toBeVisible();
+    const meta = page.locator("article header p");
+
+    await expect(meta).toHaveText(/Lead developer · 2023-03\s+–\s+2024-06/);
+    await expect(
+      page.getByRole("list", { name: "Tags" }).getByText("#web"),
+    ).toBeVisible();
     await expect(page.getByRole("img", { name: "Sample logo" })).toBeVisible();
   });
 
   test("ongoing Project shows an open-ended period", async ({ page }) => {
     await page.goto("/projects/ongoing-project/");
 
-    await expect(page.getByText("2025-01 – present")).toBeVisible();
+    await expect(page.locator("article header p")).toHaveText(
+      /2025-01\s+–\s+present/,
+    );
   });
 });

@@ -8,8 +8,3 @@ export async function getPublishedProjects(): Promise<Project[]> {
     b.data.startedAt.localeCompare(a.data.startedAt),
   );
 }
-
-export function formatPeriod(project: Project): string {
-  const { startedAt, endedAt } = project.data;
-  return `${startedAt} – ${endedAt ?? "present"}`;
-}

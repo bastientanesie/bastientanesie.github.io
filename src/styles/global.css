@@ -115,16 +115,16 @@ body {
   }
 }
 
-.prose-post :is(h2, h3, h4) {
+.prose-content :is(h2, h3, h4) {
   scroll-margin-top: 1rem;
   font-weight: 700;
 }
 
-.prose-post h2 {
+.prose-content h2 {
   font-size: 1.5rem;
 }
 
-.prose-post h3 {
+.prose-content h3 {
   font-size: 1.25rem;
 }
 

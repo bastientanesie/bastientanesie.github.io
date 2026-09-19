@@ -5,7 +5,7 @@ import { postTags, projectTags } from "./data/tags";
 
 const KEBAB_CASE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function folderIdFromEntry(kind: string, entry: string): string {
+function folderIdFromEntry(kind: "Post" | "Project", entry: string): string {
   const id = entry.split("/")[0] ?? entry;
   if (!KEBAB_CASE.test(id)) {
     throw new Error(`${kind} folder "${id}" must be kebab-case`);
@@ -41,17 +41,22 @@ const projects = defineCollection({
     generateId: ({ entry }) => folderIdFromEntry("Project", entry),
   }),
   schema: ({ image }) =>
-    z.object({
-      title: z.string().min(1),
-      description: z.string().min(1),
-      role: z.string().min(1),
-      startedAt: z.string().regex(YEAR_MONTH),
-      endedAt: z.string().regex(YEAR_MONTH).optional(),
-      tags: z.array(z.enum(projectTags)).min(1),
-      logo: z.object({ image: image(), alt: z.string().min(1) }),
-      isFeatured: z.boolean().default(false),
-      draft: z.boolean().default(false),
-    }),
+    z
+      .object({
+        title: z.string().min(1),
+        description: z.string().min(1),
+        role: z.string().min(1),
+        startedAt: z.string().regex(YEAR_MONTH),
+        endedAt: z.string().regex(YEAR_MONTH).optional(),
+        tags: z.array(z.enum(projectTags)).min(1),
+        logo: z.object({ image: image(), alt: z.string().min(1) }),
+        isFeatured: z.boolean().default(false),
+        draft: z.boolean().default(false),
+      })
+      .refine(({ startedAt, endedAt }) => !endedAt || endedAt >= startedAt, {
+        message: "endedAt must not be before startedAt",
+        path: ["endedAt"],
+      }),
 });
 
 export const collections = { posts, projects };

@@ -1,13 +1,15 @@
 ---
-import { formatPeriod, type Project } from "../../lib/projects";
+import type { Project } from "../../lib/projects";
 
 interface Props {
   project: Project;
 }
 
-const { project } = Astro.props;
+const { role, startedAt, endedAt } = Astro.props.project.data;
 ---
 
 <p class="text-muted text-sm">
-  {project.data.role} · {formatPeriod(project)}
+  {role} · <time datetime={startedAt}>{startedAt}</time>
+  {" – "}
+  {endedAt ? <time datetime={endedAt}>{endedAt}</time> : "present"}
 </p>
