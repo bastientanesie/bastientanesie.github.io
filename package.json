@@ -15,7 +15,8 @@
     "lint": "astro sync && eslint --max-warnings 0 .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "og:default": "node scripts/generate-og-default.ts"
+    "og:default": "node scripts/generate-og-default.ts",
+    "icons": "node scripts/generate-icons.ts"
   },
   "dependencies": {
     "@alpinejs/csp": "^3.17.3",
