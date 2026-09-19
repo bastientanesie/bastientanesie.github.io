@@ -20,3 +20,15 @@ DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` po
 ## Default branch
 
 The `deploy` job only fires on the repository's default branch (`main`), and `push` runs are limited to it. Pull requests run every job except `deploy`.
+
+## Content Security Policy
+
+GitHub Pages cannot set custom HTTP headers, so the CSP is delivered as a `<meta http-equiv="content-security-policy">` tag, generated at build time by Astro (`security.csp` in `astro.config.mjs`). Inline scripts and styles are allowed by SHA-256 hash, never by `'unsafe-inline'` for scripts or `<style>` elements. Alpine runs from `@alpinejs/csp`, so no `'unsafe-eval'` is needed. `tests/csp.spec.ts` checks every page for the policy and for violations.
+
+Known limits of the `<meta>` delivery on Pages:
+
+- `frame-ancestors`, `report-uri` and `sandbox` are ignored in a `<meta>` tag, so clickjacking protection and violation reporting are unavailable.
+- The policy applies only once the parser reaches the tag; it protects nothing before it in `<head>`, and it does not cover non-HTML responses (RSS, `humans.txt`, images).
+- Other security headers (`X-Content-Type-Options`, `Referrer-Policy`, HSTS beyond what Pages sets) cannot be configured.
+- Any new inline script or style must go through Astro so that its hash is added to the policy at build time.
+- Shiki writes `style` attributes on code blocks, which hashes cannot cover, so `style-src-attr 'unsafe-inline'` is allowed. Style attributes cannot run script; `script-src` stays hash-only.
