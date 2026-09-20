@@ -5,3 +5,4 @@ dist/
 .make/
 test-results/
 playwright-report/
+.lighthouseci/

@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      astro:
+        patterns: ["astro", "@astrojs/*"]
+      playwright:
+        patterns: ["@playwright/test", "@axe-core/playwright"]
+      dev-tools:
+        dependency-type: development
+        exclude-patterns:
+          ["@playwright/test", "@axe-core/playwright", "@astrojs/*"]
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      playwright:
+        patterns: ["mcr.microsoft.com/playwright"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

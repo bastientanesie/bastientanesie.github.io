@@ -5,3 +5,4 @@ package-lock.json
 .claude/
 test-results/
 playwright-report/
+.lighthouseci/
