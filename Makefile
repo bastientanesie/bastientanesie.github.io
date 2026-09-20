@@ -8,7 +8,7 @@ INSTALL_STAMP := .make/installed
 PLAYWRIGHT_INSTALL_STAMP := .make/installed-playwright
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build test check lint format format-check icons clean
+.PHONY: help install dev build test links links-external lighthouse audit check lint format format-check icons clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -36,6 +36,18 @@ $(PLAYWRIGHT_INSTALL_STAMP): package.json package-lock.json
 
 test: build $(PLAYWRIGHT_INSTALL_STAMP) ## Serve the build and run Playwright + axe
 	$(PLAYWRIGHT) npx playwright test
+
+links: build ## Verify internal links and anchors in the built site
+	$(NODE) node scripts/check-links.ts
+
+links-external: build ## Verify external links in the built site (informational)
+	$(NODE) node scripts/check-links.ts --external
+
+lighthouse: build $(PLAYWRIGHT_INSTALL_STAMP) ## Run Lighthouse CI against the budgets in lighthouserc.json
+	$(PLAYWRIGHT) sh -c 'CHROME_PATH=$$(node -p "require(\"@playwright/test\").chromium.executablePath()") npx lhci autorun'
+
+audit: install ## Report known vulnerabilities in dependencies (informational)
+	$(NODE) npm audit
 
 check: install ## Type-check the project with astro check
 	$(NODE) npm run check

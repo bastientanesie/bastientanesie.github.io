@@ -1,0 +1,43 @@
+name: External links
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  NPM_CACHE_DIR: /tmp/npm-cache
+
+jobs:
+  external-links:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ env.NPM_CACHE_DIR }}
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - id: links
+        run: make links-external 2>&1 | tee links.log
+        continue-on-error: true
+      - if: steps.links.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "Broken external links found by the weekly check ($RUN_URL):"
+            echo
+            echo '```'
+            cat links.log
+            echo '```'
+          } > body.md
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "Broken external links" --body-file body.md

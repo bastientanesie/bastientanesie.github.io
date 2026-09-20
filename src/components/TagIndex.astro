@@ -10,7 +10,7 @@ const { tags, basePath } = Astro.props;
 ---
 
 <div x-data="tagFilter">
-  <label class="mb-4 block" hidden x-bind:hidden="isFilterHidden">
+  <label class="invisible mb-4 block" x-bind:class="filterClasses">
     <span class="mb-1 block text-sm">Filter tags</span>
     <input
       type="search"
