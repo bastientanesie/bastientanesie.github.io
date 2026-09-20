@@ -11,7 +11,7 @@
         "http://localhost:4321/blog/tags/"
       ],
       "settings": {
-        "chromeFlags": "--no-sandbox --headless=new"
+        "chromeFlags": "--no-sandbox --headless=new --disable-dev-shm-usage"
       }
     },
     "assert": {
