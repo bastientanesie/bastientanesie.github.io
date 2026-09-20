@@ -74,4 +74,16 @@ export const creditCategories: readonly CreditCategory[] = [
       },
     ],
   },
+  {
+    id: "workflow",
+    title: "Workflow",
+    credits: [
+      {
+        name: "Matt Pocock's skills",
+        href: "https://github.com/mattpocock/skills",
+        description:
+          "Agent skills used to specify, implement and review the site",
+      },
+    ],
+  },
 ];
