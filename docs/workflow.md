@@ -13,9 +13,7 @@ Domain vocabulary lives in `CONTEXT.md` and decisions in `docs/adr/` (`domain-mo
 
 ## Git
 
-- Branch from `main`, one branch per ticket (`feat/...`, `fix/...`).
-- Conventional Commits; the pull request title is conventional and its description contains `Closes #N`.
-- Only squash merge is enabled. The `Co-Authored-By` trailer is kept.
+Branch from `main`, one branch per ticket. Commit and pull request conventions are in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## Skills
 

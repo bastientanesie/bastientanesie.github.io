@@ -20,7 +20,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 
 ## Content
 
-A Post or a Project is a folder in `src/content/` whose name (kebab-case) is its `id`. Schemas are validated at build time. Credit any third-party visual in `src/data/credits.ts`.
+A Post or a Project is a folder in `src/content/` whose name (kebab-case) is its `id`. Schemas are validated at build time. Credit any third-party visual, tool or library in `src/data/credits.ts`.
 
 ## Working method
 

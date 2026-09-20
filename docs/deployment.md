@@ -7,11 +7,10 @@ The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make
 - **Settings → Pages → Source**: `GitHub Actions`.
 - **Settings → Pages → Custom domain**: `bastien.tanesie.fr` (no `CNAME` file needed with the Actions source). Enforce HTTPS once the certificate is issued.
 - **Settings → General → Pull Requests**: allow squash merging only, default the commit message to the pull request title and description, and delete head branches after merge.
-- **Settings → General → Default branch**: `main`. The former site is archived on the `legacy` branch, which is not served.
 
 ## DNS
 
-DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`, with the proxy **disabled** (grey cloud, "DNS only"). If proxied, GitHub cannot validate the domain or issue the HTTPS certificate. `bastientanesie.github.io` then redirects to the custom domain automatically.
+DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`, with the proxy **disabled** (grey cloud, "DNS only"). If proxied, GitHub cannot validate the domain or issue the HTTPS certificate. `bastientanesie.github.io` then redirects to the custom domain automatically, because this repository is the user site (`bastientanesie/bastientanesie.github.io`). Once the record is in place, `dig bastien.tanesie.fr CNAME` should return `bastientanesie.github.io`, and Settings → Pages shows the DNS check as successful.
 
 ## Workflow conventions
 
@@ -29,7 +28,7 @@ DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` po
 
 ## Default branch
 
-The `deploy` job only fires on the repository's default branch (`main`), and `push` runs are limited to it. Pull requests run every job except `deploy`.
+The former site is archived on the `legacy` branch, which is not served. The `deploy` job only fires on the repository's default branch (`main`), and `push` runs are limited to it. Pull requests run every job except `deploy`.
 
 ## Content Security Policy
 
