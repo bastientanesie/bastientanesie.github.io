@@ -1,13 +1,5 @@
 export const SITE_NAME = "Bastien Tanésie";
 
-export const navigation = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about/" },
-  { label: "How I work", href: "/how-i-work/" },
-  { label: "Projects", href: "/projects/" },
-  { label: "Blog", href: "/blog/" },
-] as const;
-
 export const profiles = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/bastientanesie/" },
   { label: "Bluesky", href: "https://bsky.app/profile/bastien.tanesie.fr" },

@@ -10,8 +10,6 @@ const pages = [
   { name: "projects list", path: "/projects/" },
   { name: "Project page", path: "/projects/sample-project/" },
   { name: "credits page", path: "/credits/" },
-  { name: "about page", path: "/about/" },
-  { name: "how I work page", path: "/how-i-work/" },
   { name: "legal notice", path: "/legal/" },
   { name: "404 page", path: "/404.html" },
 ];
