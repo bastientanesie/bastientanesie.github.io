@@ -22,7 +22,7 @@ The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make
 ## Quality guardrails
 
 - `make links` checks internal links and anchors in `dist/`. It blocks CI.
-- `make lighthouse` runs Lighthouse CI (mobile, 3 runs, median) on the home page, a Post, a Project and a tag index, against the budgets in `lighthouserc.json`: performance ≥ 0.95, accessibility, best practices and SEO = 1, LCP ≤ 2 s, CLS ≤ 0.05, TBT ≤ 100 ms, JS ≤ 50 kB, CSS ≤ 30 kB. Sizes are measured on `astro preview`, which does not compress, so they are stricter than the gzip budgets. Tighten the thresholds after real measurements. It blocks CI.
+- `make lighthouse` runs Lighthouse CI (mobile, 3 runs, median) on the home page, a Post, a Project and a tag index, against the budgets in `lighthouserc.json`: performance ≥ 0.95, accessibility, best practices and SEO = 1, LCP ≤ 2 s, CLS ≤ 0.05, TBT ≤ 100 ms, JS ≤ 50 kB, CSS ≤ 30 kB. `dist/` is served by `serve`, which gzips responses like GitHub Pages does, so the JS and CSS budgets apply to compressed transfer sizes (measured: JS ≈ 24 kB, CSS ≈ 5 kB). It blocks CI.
 - `make audit` (`npm audit`) is informational.
 - `.github/workflows/external-links.yaml` checks external links every Monday (`make links-external`) and opens an issue when one is broken.
 - `.github/dependabot.yml` opens weekly grouped updates for npm, Docker and GitHub Actions. There is no automerge: CI gates each PR.
