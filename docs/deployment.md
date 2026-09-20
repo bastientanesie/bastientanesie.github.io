@@ -10,7 +10,7 @@ The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make
 
 ## DNS
 
-DNS for `tanesie.fr` is managed on Cloudflare. Add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`, with the proxy **disabled** (grey cloud, "DNS only"). If proxied, GitHub cannot validate the domain or issue the HTTPS certificate. `bastientanesie.github.io` then redirects to the custom domain automatically, because this repository is the user site (`bastientanesie/bastientanesie.github.io`). Once the record is in place, `dig bastien.tanesie.fr CNAME` should return `bastientanesie.github.io`, and Settings → Pages shows the DNS check as successful.
+`tanesie.fr` is registered at OVH, whose nameservers point to Cloudflare, so DNS records are managed on Cloudflare, not at the registrar. Add a `CNAME` record `bastien` pointing to `bastientanesie.github.io`, with the proxy **disabled** (grey cloud, "DNS only"). If proxied, GitHub cannot validate the domain or issue the HTTPS certificate. `bastientanesie.github.io` then redirects to the custom domain automatically, because this repository is the user site (`bastientanesie/bastientanesie.github.io`). Once the record is in place, `dig bastien.tanesie.fr CNAME` should return `bastientanesie.github.io`, and Settings → Pages shows the DNS check as successful.
 
 ## Workflow conventions
 
