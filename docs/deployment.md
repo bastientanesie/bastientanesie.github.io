@@ -6,6 +6,8 @@ The site is built and deployed by `.github/workflows/ci.yaml`: one job per `make
 
 - **Settings → Pages → Source**: `GitHub Actions`.
 - **Settings → Pages → Custom domain**: `bastien.tanesie.fr` (no `CNAME` file needed with the Actions source). Enforce HTTPS once the certificate is issued.
+- **Settings → General → Pull Requests**: allow squash merging only, default the commit message to the pull request title and description, and delete head branches after merge.
+- **Settings → General → Default branch**: `main`. The former site is archived on the `legacy` branch, which is not served.
 
 ## DNS
 
