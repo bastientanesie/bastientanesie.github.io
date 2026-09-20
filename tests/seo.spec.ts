@@ -22,6 +22,26 @@ const pages = [
   { path: "/projects/sample-project/", type: "WebPage" },
 ];
 
+test.describe("page titles", () => {
+  test("suffix the site name on inner pages only in <title>", async ({
+    page,
+  }) => {
+    await page.goto("/projects/sample-project/");
+
+    await expect(page).toHaveTitle("Sample project | Bastien Tanésie");
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      "content",
+      "Sample project",
+    );
+  });
+
+  test("home keeps the bare site name", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page).toHaveTitle("Bastien Tanésie");
+  });
+});
+
 test.describe("page metadata", () => {
   for (const { path, type } of pages) {
     test(`${path} has title, description, canonical and a JSON-LD graph`, async ({

@@ -12,6 +12,7 @@
     "astro": "astro",
     "preview": "astro preview --host 0.0.0.0",
     "check": "astro check",
+    "test:unit": "vitest run",
     "lint": "astro sync && eslint --max-warnings 0 .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -44,6 +45,7 @@
     "prettier": "^3.9.8",
     "prettier-plugin-astro": "^1.0.1",
     "serve": "^14.2.6",
-    "typescript-eslint": "^8.70.0"
+    "typescript-eslint": "^8.70.0",
+    "vitest": "5.0.1"
   }
 }

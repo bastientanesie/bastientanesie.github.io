@@ -8,7 +8,7 @@ INSTALL_STAMP := .make/installed
 PLAYWRIGHT_INSTALL_STAMP := .make/installed-playwright
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev build test links links-external lighthouse audit check lint format format-check icons clean
+.PHONY: help install dev build test test-unit links links-external lighthouse audit check lint format format-check icons clean
 
 help: ## List available targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -36,6 +36,9 @@ $(PLAYWRIGHT_INSTALL_STAMP): package.json package-lock.json
 
 test: build $(PLAYWRIGHT_INSTALL_STAMP) ## Serve the build and run Playwright + axe
 	$(PLAYWRIGHT) npx playwright test
+
+test-unit: install ## Run the Vitest unit tests
+	$(NODE) npm run test:unit
 
 links: build ## Verify internal links and anchors in the built site
 	$(NODE) node scripts/check-links.ts
