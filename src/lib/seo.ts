@@ -35,6 +35,10 @@ interface GraphOptions {
   nodes?: JsonLdNode[] | undefined;
 }
 
+export function documentTitle(title: string): string {
+  return title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+}
+
 export function absoluteUrl(path: string, site: URL): string {
   return new URL(path, site).href;
 }

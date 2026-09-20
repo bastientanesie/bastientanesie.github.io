@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../../lib/projects";
+import { formatYearMonth } from "../../lib/year-month";
 
 interface Props {
   project: Project;
@@ -9,7 +10,11 @@ const { role, startedAt, endedAt } = Astro.props.project.data;
 ---
 
 <p class="text-muted text-sm">
-  {role} · <time datetime={startedAt}>{startedAt}</time>
+  {role} · <time datetime={startedAt}>{formatYearMonth(startedAt)}</time>
   {" – "}
-  {endedAt ? <time datetime={endedAt}>{endedAt}</time> : "present"}
+  {endedAt ? (
+    <time datetime={endedAt}>{formatYearMonth(endedAt)}</time>
+  ) : (
+    "present"
+  )}
 </p>

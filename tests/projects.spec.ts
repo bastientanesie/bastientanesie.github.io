@@ -26,7 +26,7 @@ test.describe("projects", () => {
     );
     const meta = page.locator("article header p");
 
-    await expect(meta).toHaveText(/Lead developer · 2023-03\s+–\s+2024-06/);
+    await expect(meta).toHaveText(/Lead developer · Mar 2023\s+–\s+Jun 2024/);
     await expect(
       page.getByRole("list", { name: "Tags" }).getByText("#web"),
     ).toBeVisible();
@@ -37,7 +37,7 @@ test.describe("projects", () => {
     await page.goto("/projects/ongoing-project/");
 
     await expect(page.locator("article header p")).toHaveText(
-      /2025-01\s+–\s+present/,
+      /Jan 2025\s+–\s+present/,
     );
   });
 });

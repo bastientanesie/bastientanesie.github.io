@@ -3,6 +3,7 @@ import { getImage } from "astro:assets";
 import defaultOgImage from "../assets/og-default.png";
 import {
   buildJsonLdGraph,
+  documentTitle,
   resolveSite,
   serializeJsonLd,
   SITE_NAME,
@@ -41,7 +42,7 @@ const graph = noindex
     );
 ---
 
-<title>{title}</title>
+<title>{documentTitle(title)}</title>
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex" />}
 {!noindex && <link rel="canonical" href={canonical.href} />}

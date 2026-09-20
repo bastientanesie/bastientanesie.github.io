@@ -2,16 +2,7 @@ import { glob } from "astro/loaders";
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { postTags, projectTags } from "./data/tags";
-
-const KEBAB_CASE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-
-function folderIdFromEntry(kind: "Post" | "Project", entry: string): string {
-  const id = entry.split("/")[0] ?? entry;
-  if (!KEBAB_CASE.test(id)) {
-    throw new Error(`${kind} folder "${id}" must be kebab-case`);
-  }
-  return id;
-}
+import { folderIdFromEntry } from "./lib/folder-id";
 
 const posts = defineCollection({
   loader: glob({
