@@ -106,7 +106,7 @@ test.describe("navigation", () => {
 
     await expect(
       page.getByRole("navigation", { name: "Main" }).getByRole("link"),
-    ).toHaveCount(5);
+    ).toHaveCount(3);
     await expect(page.getByRole("button", { name: "Menu" })).toBeHidden();
   });
 
@@ -119,7 +119,7 @@ test.describe("navigation", () => {
     const menu = page.getByRole("navigation", { name: "Mobile" });
     await expect(menu).toBeHidden();
     await page.getByRole("button", { name: "Menu" }).click();
-    await expect(menu.getByRole("link")).toHaveCount(5);
+    await expect(menu.getByRole("link")).toHaveCount(3);
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
   });

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { navigation } from "../data/site";
+import { navigation } from "../data/navigation";
 import { getPublishedPosts } from "../lib/posts";
 import { getPublishedProjects } from "../lib/projects";
 import { SITE_NAME, SITEMAP_PATH, textResponse } from "../lib/seo";
