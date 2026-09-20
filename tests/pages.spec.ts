@@ -19,17 +19,19 @@ test.describe("home page", () => {
 });
 
 test.describe("static pages", () => {
-  const pages = [
-    { path: "/about/", heading: "About" },
-    { path: "/how-i-work/", heading: "How I work" },
-    { path: "/legal/", heading: "Legal notice" },
-  ];
+  const pages = [{ path: "/legal/", heading: "Legal notice" }];
 
   for (const { path, heading } of pages) {
     test(`${path} renders its heading`, async ({ page }) => {
       await page.goto(path);
 
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(heading);
+    });
+  }
+
+  for (const path of ["/about/", "/how-i-work/"]) {
+    test(`${path} is not published in production`, async ({ request }) => {
+      expect((await request.get(path)).status()).toBe(404);
     });
   }
 

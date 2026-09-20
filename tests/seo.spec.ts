@@ -12,7 +12,6 @@ async function readJsonLdGraph(page: Page) {
 
 const pages = [
   { path: "/", type: "WebPage" },
-  { path: "/about/", type: "ProfilePage" },
   { path: "/blog/", type: "CollectionPage" },
   { path: "/blog/tags/web/", type: "CollectionPage" },
   { path: "/projects/", type: "CollectionPage" },
@@ -203,7 +202,7 @@ test.describe("Open Graph images", () => {
       "article",
     );
 
-    await page.goto("/about/");
+    await page.goto("/legal/");
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
       "content",
       "website",
@@ -211,7 +210,7 @@ test.describe("Open Graph images", () => {
   });
 
   test("other pages reference the default image", async ({ page, request }) => {
-    await page.goto("/about/");
+    await page.goto("/legal/");
 
     const content = await page
       .locator('meta[property="og:image"]')
