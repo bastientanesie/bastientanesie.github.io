@@ -1,40 +1,157 @@
 ---
-import PostCard from "../components/blog/PostCard.astro";
+import { Picture } from "astro:assets";
+import avatar from "../assets/bastien.png";
 import ProjectCard from "../components/projects/ProjectCard.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import { getPublishedPosts } from "../lib/posts";
 import { getPublishedProjects } from "../lib/projects";
+import { linkedInProfile } from "../data/site";
 
-const LATEST_POSTS_COUNT = 3;
-
-const latestPosts = (await getPublishedPosts()).slice(0, LATEST_POSTS_COUNT);
 const featuredProjects = (await getPublishedProjects()).filter(
   ({ data }) => data.isFeatured,
 );
+
+const keyFigures = [
+  { value: "15 years", label: "of PHP, from Zend Framework to Laravel" },
+  {
+    value: "20+ projects",
+    label: "delivered for clients, from startups to public tenders",
+  },
+  {
+    value: "9 projects",
+    label: "led end to end, from specification to production",
+  },
+  { value: "4 hats", label: "backend, frontend, DevOps and team lead" },
+];
+
+const strengths = [
+  {
+    title: "Laravel & PHP on the backend",
+    text: "Architecture, data modelling and APIs on MySQL-backed applications, from first specification to production. Laravel makes it easy to maintain.",
+  },
+  {
+    title: "Vue.js & Tailwind on the frontend",
+    text: "Interfaces built with Vue.js and Tailwind CSS on live platforms. Alpine.js for lighter needs. I care as much about the frontend as I do about the backend.",
+  },
+  {
+    title: "DevOps: CI/CD & Ansible, so it actually ships",
+    text: "CI/CD with GitLab or GitHub, provisioning with Ansible and automation so environments are reproducible and deployments are safe and boring.",
+  },
+  {
+    title: "Lead, mentor & legacy expert",
+    text: "Writing specifications, mentoring developers, sharing knowledge and taming legacy codebases: I own the outcome, not only the code.",
+  },
+];
+
+const faqs = [
+  {
+    question: "What kind of role are you looking for?",
+    answer:
+      "A permanent position as a Laravel and Vue.js Lead Developer, ideally in a startup or a small to mid-sized company where I can own the technical direction.",
+  },
+  {
+    question: "Where can you work from?",
+    answer:
+      "Full remote from anywhere in Europe, working in English. I live in the Rouen metropolitan area, France, so a hybrid setup is possible around Rouen.",
+  },
+  {
+    question: "Are you more of a backend or a frontend developer?",
+    answer:
+      "Both, with the same weight. Laravel and Vue.js are equally central to how I build products.",
+  },
+  {
+    question: "Can you work on a legacy codebase?",
+    answer:
+      "Yes. I spent ten years evolving one client platform from Zend Framework 1 and PHP 5 towards Composer, Git, Vue.js and Tailwind CSS, without a full rewrite.",
+  },
+  {
+    question: "Where can I see your work?",
+    answer:
+      "The projects page details my role, stack and results on each project, and the blog shares what I learn along the way.",
+  },
+];
+
+const faqNode = {
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer },
+  })),
+};
 ---
 
 <PageLayout
-  title="Bastien Tanésie — Laravel & PHP Web Developer"
-  description="Bastien Tanésie, web developer with 15 years of PHP experience. Articles on Laravel, Ansible and DevOps, plus projects I've built."
+  pageType="ProfilePage"
+  title="Bastien Tanésie — Laravel & Vue.js Lead Developer"
+  description="Laravel and Vue.js Lead Developer with 15 years of PHP experience. Open to permanent roles: full remote in Europe or hybrid around Rouen, France."
+  nodes={[faqNode]}
 >
-  <h1 class="text-3xl font-bold">Bastien Tanésie</h1>
-  <section class="mt-8" aria-labelledby="latest-posts">
-    <h2 id="latest-posts" class="mb-4 text-2xl font-semibold">
-      Latest posts
+  <section
+    aria-labelledby="hero"
+    class="flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between"
+  >
+    <div>
+      <p class="text-muted">Bastien Tanésie</p>
+      <h1 id="hero" class="mt-2 text-4xl font-bold">
+        Laravel &amp; Vue.js Lead Developer
+      </h1>
+      <p class="mt-4 max-w-prose text-lg">
+        I build and lead the development of web products end to end, from
+        Laravel backends to Vue.js interfaces. 15 years of PHP, and open to a
+        permanent role: full remote in Europe, or hybrid around Rouen, France.
+      </p>
+      <p class="mt-6 flex flex-wrap gap-4">
+        <a
+          href={linkedInProfile.href}
+          class="rounded-md border border-border bg-surface-raised px-4 py-2 font-semibold underline underline-offset-4"
+        >
+          Get in touch on LinkedIn
+        </a>
+        <a href="/projects/" class="px-4 py-2 underline underline-offset-4">
+          See my projects
+        </a>
+      </p>
+    </div>
+    <Picture
+      src={avatar}
+      alt="Illustrated portrait of Bastien Tanésie"
+      widths={[96, 192, 384, 576]}
+      sizes="(min-width: 768px) 192px, 96px"
+      formats={["avif", "webp"]}
+      loading="eager"
+      pictureAttributes={{ class: "shrink-0" }}
+      class="size-24 rounded-full object-cover md:size-48"
+    />
+  </section>
+
+  <section class="mt-12" aria-labelledby="key-figures">
+    <h2 id="key-figures" class="sr-only">
+      Key figures
     </h2>
-    <ul class="space-y-4">
-      {latestPosts.map((post) => (
-        <li>
-          <PostCard post={post} headingLevel="h3" />
+    <dl class="grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-4">
+      {keyFigures.map(({ value, label }) => (
+        <div class="rounded-md border border-border p-4">
+          <dt class="text-2xl font-bold">{value}</dt>
+          <dd class="mt-1 text-muted">{label}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="mt-12" aria-labelledby="strengths">
+    <h2 id="strengths" class="mb-4 text-2xl font-semibold">
+      What I bring to your team
+    </h2>
+    <ul class="grid gap-4 md:grid-cols-2">
+      {strengths.map(({ title, text }) => (
+        <li class="rounded-md border border-border p-4">
+          <h3 class="text-xl font-semibold">{title}</h3>
+          <p class="mt-2">{text}</p>
         </li>
       ))}
     </ul>
-    <p class="mt-4">
-      <a href="/blog/" class="underline underline-offset-4">
-        All posts
-      </a>
-    </p>
   </section>
+
   <section class="mt-12" aria-labelledby="featured-projects">
     <h2 id="featured-projects" class="mb-4 text-2xl font-semibold">
       Featured projects
@@ -49,6 +166,41 @@ const featuredProjects = (await getPublishedProjects()).filter(
     <p class="mt-4">
       <a href="/projects/" class="underline underline-offset-4">
         All projects
+      </a>
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="faq">
+    <h2 id="faq" class="mb-4 text-2xl font-semibold">
+      Frequently asked questions
+    </h2>
+    <div class="space-y-2">
+      {faqs.map(({ question, answer }) => (
+        <details class="rounded-md border border-border p-4">
+          <summary class="cursor-pointer font-semibold">{question}</summary>
+          <p class="mt-2">{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section
+    class="mt-12 rounded-md border border-border p-6"
+    aria-labelledby="contact"
+  >
+    <h2 id="contact" class="text-2xl font-semibold">
+      Looking for a Laravel and Vue.js lead?
+    </h2>
+    <p class="mt-2 max-w-prose">
+      Send me a message on LinkedIn and tell me about your product and your
+      team.
+    </p>
+    <p class="mt-4">
+      <a
+        href={linkedInProfile.href}
+        class="font-semibold underline underline-offset-4"
+      >
+        Get in touch on LinkedIn
       </a>
     </p>
   </section>

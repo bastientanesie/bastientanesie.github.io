@@ -31,6 +31,11 @@ export const projectTechTags = {
   "hexagonal-architecture": "Hexagonal architecture",
   "bootstrap-css": "Bootstrap CSS",
   webpack: "Webpack",
+  docker: "Docker",
+  "gitlab-ci": "GitLab CI",
+  deployer: "Deployer",
+  playwright: "Playwright",
+  renovate: "Renovate",
 } as const;
 
 export type ProjectTechTag = keyof typeof projectTechTags;

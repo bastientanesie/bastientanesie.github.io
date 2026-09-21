@@ -1,4 +1,9 @@
 ---
+interface Props {
+  groupName: string;
+}
+
+const { groupName } = Astro.props;
 const options = [
   { value: "light", label: "Light" },
   { value: "dark", label: "Dark" },
@@ -12,7 +17,7 @@ const options = [
     <label class="cursor-pointer rounded-md border border-border px-2 py-1 text-sm has-checked:bg-content has-checked:text-surface has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
       <input
         type="radio"
-        name="theme"
+        name={groupName}
         value={option.value}
         class="sr-only"
         checked={option.value === "system"}

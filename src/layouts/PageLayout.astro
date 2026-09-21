@@ -18,6 +18,17 @@ const seo = Astro.props;
     Skip to content
   </a>
   <Header />
+  <div
+    aria-hidden="true"
+    data-print-hidden
+    class="border-b border-warning-border bg-warning-surface text-warning-content"
+  >
+    <p class="page-container py-3 text-center text-sm">
+      <span class="me-1">🚧</span>
+      <strong>Work in progress:</strong> the content is here, the design is
+      still on its way.
+    </p>
+  </div>
   <main id="main" class="page-container py-8">
     <slot />
   </main>

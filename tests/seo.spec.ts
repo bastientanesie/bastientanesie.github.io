@@ -11,7 +11,7 @@ async function readJsonLdGraph(page: Page) {
 }
 
 const pages = [
-  { path: "/", type: "WebPage" },
+  { path: "/", type: "ProfilePage" },
   { path: "/blog/", type: "CollectionPage" },
   { path: "/blog/tags/web/", type: "CollectionPage" },
   { path: "/projects/", type: "CollectionPage" },
@@ -40,8 +40,18 @@ test.describe("page titles", () => {
     await page.goto("/");
 
     await expect(page).toHaveTitle(
-      "Bastien Tanésie — Laravel & PHP Web Developer",
+      "Bastien Tanésie — Laravel & Vue.js Lead Developer",
     );
+  });
+});
+
+test.describe("home page metadata", () => {
+  test("describes an FAQPage in its JSON-LD graph", async ({ page }) => {
+    await page.goto("/");
+
+    const types = (await readJsonLdGraph(page)).map((node) => node["@type"]);
+
+    expect(types).toContain("FAQPage");
   });
 });
 

@@ -1,5 +1,5 @@
 ---
-title: Language Learning Platform
+title: "Ten Years, Zero Rewrites: Evolving an Online Language Learning Platform"
 description: Ten years maintaining and evolving a legacy platform — so the client never had to start from scratch.
 client: 1to1Progress / 7Speaking
 employer: Wixiweb
@@ -40,11 +40,17 @@ In 2021, the merger with 7Speaking changed the picture. The shared goal was to c
 
 I joined 7Speaking's org chart as the technical representative for 1to1Progress, with weekly planning meetings and twice-weekly standups, all in English. Far from being a challenge, it was an opportunity: I read and listen to English every day, but the one thing missing from my toolkit was speaking it — and that bloody French accent. Doing it in a rigorous professional setting was exactly what I needed to finally close that gap.
 
-Wixiweb had also just hired a new developer. I trained and managed him on this project — my first real management experience, and a good one.
+### Leading and mentoring a junior developer
+
+Around the same time, Wixiweb hired a junior developer, and I became responsible for him on this project.
+
+I handled his onboarding and trained him on a codebase with ten years of history. I also managed his planning and workload. For the first four to five months, I worked closely with him through pair programming and code reviews, until he could work on his own. From then on, I trusted him fully.
+
+He worked with me on the project for two years, then took on responsibilities on other projects, this time fully autonomous. Seeing him reach that point is one of the things I'm proudest of on this project.
 
 ## Retrospective
 
-This project was with me for almost my entire career at Wixiweb, and I consider it a genuine personal success — not just a technical one. What matters is that everything we built was actually useful: to learners booking their lessons, to trainers managing their schedules, to 1to1Progress staff whose internal workflows genuinely improved. Having access to that kind of feedback — a learner who finally finds the tool straightforward, a training manager who saves time — that's what makes this job meaningful to me.
+This project was with me for almost my entire career at Wixiweb, and I consider it a genuine personal success — not just a technical one. What matters is that everything we built was actually useful: to learners booking their lessons, to trainers managing their schedules, to 1to1Progress staff whose internal workflows genuinely improved. Having access to that kind of feedback — a learner who finally finds the tool straightforward, a training manager who saves time — that's what makes this job meaningful to me. So is watching a junior developer I onboarded grow into full autonomy, and earn responsibilities of his own on other projects.
 
 In 2026, 7Speaking completed the migration of all features into their own application. The 1to1Progress project was retired — a logical conclusion after the merger, almost inevitable. But not a sad ending. Ten years of useful work is a good run.
 

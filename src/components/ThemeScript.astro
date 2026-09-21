@@ -41,15 +41,24 @@ import { themeColors } from "../data/site";
     applyChoice(readChoice());
 
     document.addEventListener("DOMContentLoaded", () => {
-      const switcher = document.querySelector("[data-theme-switcher]");
-      if (!switcher) return;
-      const choice = readChoice();
-      switcher.hidden = false;
-      switcher.querySelectorAll("input[type=radio]").forEach((radio) => {
-        radio.checked = radio.value === choice;
+      const radios = document.querySelectorAll(
+        "[data-theme-switcher] input[type=radio]",
+      );
+      const syncRadios = (choice) => {
+        radios.forEach((radio) => {
+          radio.checked = radio.value === choice;
+        });
+      };
+
+      document.querySelectorAll("[data-theme-switcher]").forEach((switcher) => {
+        switcher.hidden = false;
+      });
+      syncRadios(readChoice());
+      radios.forEach((radio) => {
         radio.addEventListener("change", () => {
           applyChoice(radio.value);
           saveChoice(radio.value);
+          syncRadios(radio.value);
         });
       });
     });

@@ -94,7 +94,7 @@ test.describe("blog", () => {
   }) => {
     await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/blog/hello-world/");
-    await page.getByLabel("Dark").check({ force: true });
+    await page.getByRole("radio", { name: "Dark" }).check({ force: true });
 
     await expect(page.locator("pre.astro-code")).toHaveCSS(
       "background-color",

@@ -21,7 +21,9 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <div class="flex items-center gap-3">
-      <ThemeSwitcher />
+      <div class="hidden xs:block">
+        <ThemeSwitcher groupName="theme" />
+      </div>
       <button
         type="button"
         popovertarget="mobile-menu"
@@ -39,5 +41,8 @@ const currentPath = Astro.url.pathname;
       listClass="flex flex-col gap-4"
       linkClass="block py-1"
     />
+    <div class="mt-4 xs:hidden">
+      <ThemeSwitcher groupName="theme-mobile" />
+    </div>
   </div>
 </header>

@@ -1,6 +1,6 @@
 ---
 title: A collaborative platform for France's urban planning agencies
-description: From feature scoping to production deployment, sole developer on a public tender project for France's national urban planning federation.
+description: Sole developer on the V1 of a public tender platform for France's national urban planning federation, then tutor of the apprentice who delivered the V2.
 client: FNAU
 employer: Wixiweb
 startedAt: 2017-06
@@ -39,7 +39,13 @@ Once the contract was signed, I had full technical ownership. I designed the arc
 
 My manager handled client communication and project oversight — weekly check-ins where I reported progress against milestones. The staging environment meant the client could validate features incrementally rather than seeing everything for the first time at launch. That rhythm worked. Every milestone landed on time. The production deployment went smoothly. The client signed off satisfied.
 
-The scope was respected. The deadlines were respected. For a first solo delivery, that's the benchmark that matters.
+The scope was respected. The deadlines were respected. For a first solo delivery, that's the benchmark that matters. The V1 was mine, from the first estimate to production.
+
+### Tutoring an apprentice
+
+In 2018, Wixiweb hired a junior developer on a work-study contract, and I applied to become his tutor for a year. This project was where I supported him: I trained him and guided his first steps on the codebase. I made everything I could to help him and make sure he got his diploma. And he did! He joined once the V1 was live. Over time he took over, and ended up building the V2 entirely on his own.
+
+He was later hired full-time and is still at Wixiweb today. He is now the unofficial lead for all of our e-commerce clients, and plays a major role in the company's infrastructure and sysadmin work. I'm proud to have been part of his start.
 
 ## Retrospective
 
