@@ -6,8 +6,8 @@
       "startServerReadyPattern": "4321",
       "url": [
         "http://localhost:4321/",
-        "http://localhost:4321/blog/hello-world/",
-        "http://localhost:4321/projects/sample-project/",
+        "http://localhost:4321/blog/why-i-still-choose-laravel-for-every-new-project-in-2026/",
+        "http://localhost:4321/projects/fnau-collaborative-platform/",
         "http://localhost:4321/blog/tags/"
       ],
       "settings": {
