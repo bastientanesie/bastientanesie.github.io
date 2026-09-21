@@ -206,6 +206,10 @@ test.describe("Open Graph images", () => {
       "content",
       "en_US",
     );
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+      "content",
+      "Sample project",
+    );
     const pairs = [
       ["twitter:title", "og:title"],
       ["twitter:description", "og:description"],
