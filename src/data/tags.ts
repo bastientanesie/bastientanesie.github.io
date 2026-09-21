@@ -30,7 +30,7 @@ export const projectTechTags = {
   "zend-framework-3": "Zend Framework 3",
   "hexagonal-architecture": "Hexagonal architecture",
   "bootstrap-css": "Bootstrap CSS",
-  "webpack": "Webpack",
+  webpack: "Webpack",
 } as const;
 
 export type ProjectTechTag = keyof typeof projectTechTags;

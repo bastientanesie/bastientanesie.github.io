@@ -6,8 +6,16 @@ employer: Wixiweb
 startedAt: 2017-06
 endedAt: 2019-07
 role: Lead Developer
-techTags: [zend-framework-3, mysql, php, bootstrap-css, webpack, hexagonal-architecture]
-skillTags: [architecture, project-management, specifications, solo-delivery, public-tender]
+techTags:
+  [zend-framework-3, mysql, php, bootstrap-css, webpack, hexagonal-architecture]
+skillTags:
+  [
+    architecture,
+    project-management,
+    specifications,
+    solo-delivery,
+    public-tender,
+  ]
 logo:
   image: ./fnau.jpg
   alt: FNAU brand logo
