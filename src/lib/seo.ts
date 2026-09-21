@@ -63,6 +63,13 @@ export function buildJsonLdGraph({
         "@id": personId,
         name: SITE_NAME,
         url: site.href,
+        jobTitle: "Laravel & Vue.js Lead Developer",
+        knowsAbout: ["Laravel", "Vue.js", "PHP", "Tailwind CSS"],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Rouen",
+          addressCountry: "FR",
+        },
         sameAs: profiles.map(({ href }) => href),
       },
       {

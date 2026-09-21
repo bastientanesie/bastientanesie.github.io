@@ -1,7 +1,12 @@
 export const SITE_NAME = "Bastien Tanésie";
 
+export const linkedInProfile = {
+  label: "LinkedIn",
+  href: "https://www.linkedin.com/in/bastientanesie/",
+} as const;
+
 export const profiles = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/bastientanesie/" },
+  linkedInProfile,
   { label: "Bluesky", href: "https://bsky.app/profile/bastien.tanesie.fr" },
   { label: "GitHub", href: "https://github.com/bastientanesie" },
 ] as const;

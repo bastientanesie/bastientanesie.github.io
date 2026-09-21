@@ -1,14 +1,17 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("home page", () => {
-  test("shows latest Posts and Featured projects", async ({ page }) => {
+  test("presents the landing page and its Featured projects", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    const latestPosts = page.getByRole("region", { name: "Latest posts" });
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "Laravel & Vue.js Lead Developer",
+    );
     await expect(
-      latestPosts.getByRole("link", { name: "Hello, world" }),
-    ).toHaveAttribute("href", "/blog/hello-world/");
-    await expect(latestPosts.getByText("Unpublished draft")).toHaveCount(0);
+      page.getByRole("link", { name: "Get in touch on LinkedIn" }).first(),
+    ).toHaveAttribute("href", /linkedin\.com/);
 
     const featured = page.getByRole("region", { name: "Featured projects" });
     await expect(
