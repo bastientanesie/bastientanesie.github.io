@@ -4,10 +4,12 @@ import { z } from "astro/zod";
 import { postTags, projectTags } from "./data/tags";
 import { folderIdFromEntry } from "./lib/folder-id";
 
+const contentDir = process.env.CONTENT_DIR ?? "./src/content";
+
 const posts = defineCollection({
   loader: glob({
     pattern: "*/index.md",
-    base: "./src/content/posts",
+    base: `${contentDir}/posts`,
     generateId: ({ entry }) => folderIdFromEntry("Post", entry),
   }),
   schema: ({ image }) =>
@@ -28,7 +30,7 @@ const YEAR_MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
 const projects = defineCollection({
   loader: glob({
     pattern: "*/index.md",
-    base: "./src/content/projects",
+    base: `${contentDir}/projects`,
     generateId: ({ entry }) => folderIdFromEntry("Project", entry),
   }),
   schema: ({ image }) =>

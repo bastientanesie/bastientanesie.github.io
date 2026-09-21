@@ -4,6 +4,7 @@ export HOST_GID := $(shell id -g)
 COMPOSE := docker compose
 NODE := $(COMPOSE) run --rm node
 PLAYWRIGHT := $(COMPOSE) run --rm playwright
+TEST_CONTENT_DIR := ./tests/fixtures/content
 INSTALL_STAMP := .make/installed
 PLAYWRIGHT_INSTALL_STAMP := .make/installed-playwright
 
@@ -34,7 +35,9 @@ $(PLAYWRIGHT_INSTALL_STAMP): package.json package-lock.json
 	$(PLAYWRIGHT) npm ci
 	@touch $@
 
-test: build $(PLAYWRIGHT_INSTALL_STAMP) ## Serve the build and run Playwright + axe
+test: install $(PLAYWRIGHT_INSTALL_STAMP) ## Build with the test fixtures, serve it and run Playwright + axe
+	$(NODE) npm run og:default
+	$(COMPOSE) run --rm -e CONTENT_DIR=$(TEST_CONTENT_DIR) node npm run build
 	$(PLAYWRIGHT) npx playwright test
 
 test-unit: install ## Run the Vitest unit tests
