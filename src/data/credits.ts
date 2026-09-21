@@ -69,8 +69,8 @@ export const creditCategories: readonly CreditCategory[] = [
     ],
   },
   {
-    id: "typefaces",
-    title: "Typefaces",
+    id: "fonts-and-images",
+    title: "Fonts & Images",
     credits: [
       {
         name: "Inter",
@@ -81,6 +81,11 @@ export const creditCategories: readonly CreditCategory[] = [
         name: "Fontsource",
         href: "https://fontsource.org/",
         description: "Self-hosted font packages",
+      },
+      {
+        name: "Arnaud Lemercier",
+        href: "https://arnaud.lemercier.me/",
+        description: "Author of my avatar",
       },
     ],
   },
