@@ -5,7 +5,7 @@ test.describe("Post tags", () => {
     await page.goto("/blog/tags/tooling/");
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Posts tagged #tooling",
+      "Posts tagged Tooling",
     );
     await expect(
       page.getByRole("link", { name: "Hello, world" }),
@@ -29,7 +29,7 @@ test.describe("Post tags", () => {
   test("Post page links its tags to their pages", async ({ page }) => {
     await page.goto("/blog/hello-world/");
 
-    await page.getByRole("link", { name: "#tooling" }).click();
+    await page.getByRole("link", { name: "Tooling" }).click();
     await expect(page).toHaveURL(/\/blog\/tags\/tooling\/$/);
   });
 
@@ -39,7 +39,7 @@ test.describe("Post tags", () => {
 
     await expect(tags.getByRole("link")).toHaveCount(2);
     await page.getByLabel("Filter tags").fill("too");
-    await expect(tags.getByRole("link")).toHaveText(["#tooling (2)"]);
+    await expect(tags.getByRole("link")).toHaveText(["Tooling (2)"]);
     await page.getByLabel("Filter tags").fill("nope");
     await expect(tags.getByRole("link")).toHaveCount(0);
   });
@@ -50,7 +50,7 @@ test.describe("Project tags", () => {
     await page.goto("/projects/tags/devops/");
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Projects tagged #devops",
+      "Projects tagged DevOps",
     );
     await expect(
       page.getByRole("link", { name: "Ongoing project" }),
@@ -64,10 +64,16 @@ test.describe("Project tags", () => {
     page,
   }) => {
     await page.goto("/projects/tags/");
-    const tags = page.getByRole("list", { name: "Tags" });
+    const tags = page.locator("main").getByRole("link", { name: /\(\d+\)/ });
 
-    await expect(tags.getByRole("link")).toHaveCount(3);
+    await expect(tags).toHaveCount(3);
+    await expect(page.getByRole("list", { name: "Tech tags" })).toHaveText(
+      /Web/,
+    );
+    await expect(page.getByRole("list", { name: "Skill tags" })).toHaveText(
+      /Backend/,
+    );
     await page.getByLabel("Filter tags").fill("end");
-    await expect(tags.getByRole("link")).toHaveText(["#backend (1)"]);
+    await expect(tags).toHaveText(["Backend (1)"]);
   });
 });

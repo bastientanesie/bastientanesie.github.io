@@ -1,10 +1,11 @@
 ---
 import TagIndex from "../../../components/TagIndex.astro";
 import PageLayout from "../../../layouts/PageLayout.astro";
-import { getPublishedPosts } from "../../../lib/posts";
+import { postTags } from "../../../data/tags";
+import { getPublishedPosts, postTagsOf } from "../../../lib/posts";
 import { summarizeTags } from "../../../lib/tags";
 
-const tags = summarizeTags(await getPublishedPosts());
+const tags = summarizeTags(await getPublishedPosts(), postTagsOf, postTags);
 ---
 
 <PageLayout
@@ -13,5 +14,5 @@ const tags = summarizeTags(await getPublishedPosts());
   description="Browse Posts by tag."
 >
   <h1 class="mb-6 text-3xl font-bold">Post tags</h1>
-  <TagIndex tags={tags} basePath="/blog/tags/" />
+  <TagIndex groups={[{ tags }]} basePath="/blog/tags/" />
 </PageLayout>

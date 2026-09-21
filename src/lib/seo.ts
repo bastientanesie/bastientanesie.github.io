@@ -1,6 +1,7 @@
 import { profiles, SITE_NAME } from "../data/site";
+import { postTags, projectTags } from "../data/tags";
 import type { Post } from "./posts";
-import type { Project } from "./projects";
+import { projectTagsOf, type Project } from "./projects";
 
 export { SITE_NAME } from "../data/site";
 
@@ -113,7 +114,7 @@ export function buildPostNode(post: Post, site: URL): JsonLdNode {
     description,
     datePublished: publishedAt.toISOString(),
     dateModified: (updatedAt ?? publishedAt).toISOString(),
-    keywords: tags,
+    keywords: tags.map((tag) => postTags[tag]),
     inLanguage: "en",
     author: { "@id": personId },
     publisher: { "@id": personId },
@@ -121,7 +122,7 @@ export function buildPostNode(post: Post, site: URL): JsonLdNode {
 }
 
 export function buildProjectNode(project: Project, site: URL): JsonLdNode {
-  const { title, description, tags, startedAt } = project.data;
+  const { title, description, startedAt } = project.data;
   const url = absoluteUrl(`/projects/${project.id}/`, site);
   return {
     "@type": "CreativeWork",
@@ -130,7 +131,7 @@ export function buildProjectNode(project: Project, site: URL): JsonLdNode {
     name: title,
     description,
     dateCreated: startedAt,
-    keywords: tags,
+    keywords: projectTagsOf(project).map((tag) => projectTags[tag]),
     inLanguage: "en",
     creator: { "@id": absoluteUrl("/#person", site) },
   };

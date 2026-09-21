@@ -18,7 +18,9 @@ test.describe("projects", () => {
     expect(response.status()).toBe(404);
   });
 
-  test("Project page shows role, period, tags and logo", async ({ page }) => {
+  test("Project page shows role, client, employer, period, tags and logo", async ({
+    page,
+  }) => {
     await page.goto("/projects/sample-project/");
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -26,9 +28,14 @@ test.describe("projects", () => {
     );
     const meta = page.locator("article header p");
 
-    await expect(meta).toHaveText(/Lead developer · Mar 2023\s+–\s+Jun 2024/);
+    await expect(meta).toHaveText(
+      /Lead developer · Sample client \(via Sample studio\) · Mar 2023\s+–\s+Jun 2024/,
+    );
     await expect(
-      page.getByRole("list", { name: "Tags" }).getByText("#web"),
+      page.getByRole("list", { name: "Tech tags" }).getByText("Web"),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("list", { name: "Skill tags" }).getByText("Backend"),
     ).toBeVisible();
     await expect(page.getByRole("img", { name: "Sample logo" })).toBeVisible();
   });

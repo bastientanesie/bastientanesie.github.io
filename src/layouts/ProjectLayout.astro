@@ -1,6 +1,7 @@
 ---
 import ProjectLogo from "../components/projects/ProjectLogo.astro";
 import ProjectMeta from "../components/projects/ProjectMeta.astro";
+import { projectSkillTags, projectTechTags } from "../data/tags";
 import type { Project } from "../lib/projects";
 import { ogImagePath } from "../lib/og-image";
 import { buildProjectNode, resolveSite } from "../lib/seo";
@@ -11,7 +12,11 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags } = project.data;
+const { title, description, techTags, skillTags } = project.data;
+const tagGroups = [
+  { name: "Tech tags", tags: techTags, labels: projectTechTags },
+  { name: "Skill tags", tags: skillTags, labels: projectSkillTags },
+];
 const nodes = [buildProjectNode(project, resolveSite(Astro))];
 ---
 
@@ -29,18 +34,20 @@ const nodes = [buildProjectNode(project, resolveSite(Astro))];
         <div class="mt-2">
           <ProjectMeta project={project} />
         </div>
-        <ul class="mt-2 flex gap-2 text-sm" aria-label="Tags">
-          {tags.map((tag) => (
-            <li>
-              <a
-                href={`/projects/tags/${tag}/`}
-                class="text-muted underline-offset-4 hover:underline"
-              >
-                #{tag}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {tagGroups.map(({ name, tags, labels }) => (
+          <ul class="mt-2 flex flex-wrap gap-2 text-sm" aria-label={name}>
+            {tags.map((tag) => (
+              <li>
+                <a
+                  href={`/projects/tags/${tag}/`}
+                  class="text-muted underline-offset-4 hover:underline"
+                >
+                  {labels[tag as keyof typeof labels]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ))}
       </div>
     </header>
     <div class="prose-content space-y-4">

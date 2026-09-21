@@ -1,5 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
+import { postTags } from "../data/tags";
 import { getPublishedPosts } from "../lib/posts";
 import { SITE_NAME } from "../lib/seo";
 
@@ -14,7 +15,7 @@ export const GET: APIRoute = async ({ site }) => {
       description: data.description,
       pubDate: data.publishedAt,
       link: `/blog/${id}/`,
-      categories: data.tags,
+      categories: data.tags.map((tag) => postTags[tag]),
     })),
   });
 };

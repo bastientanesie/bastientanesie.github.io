@@ -1,10 +1,26 @@
 ---
 import TagIndex from "../../../components/TagIndex.astro";
 import PageLayout from "../../../layouts/PageLayout.astro";
-import { getPublishedProjects } from "../../../lib/projects";
+import {
+  projectSkillTags,
+  projectTags,
+  projectTechTags,
+} from "../../../data/tags";
+import { getPublishedProjects, projectTagsOf } from "../../../lib/projects";
 import { summarizeTags } from "../../../lib/tags";
 
-const tags = summarizeTags(await getPublishedProjects());
+const summaries = summarizeTags(
+  await getPublishedProjects(),
+  projectTagsOf,
+  projectTags,
+);
+const groups = [
+  { name: "Tech tags", labels: projectTechTags },
+  { name: "Skill tags", labels: projectSkillTags },
+].map(({ name, labels }) => ({
+  name,
+  tags: summaries.filter(({ tag }) => tag in labels),
+}));
 ---
 
 <PageLayout
@@ -13,5 +29,5 @@ const tags = summarizeTags(await getPublishedProjects());
   description="Browse Projects by tag."
 >
   <h1 class="mb-6 text-3xl font-bold">Project tags</h1>
-  <TagIndex tags={tags} basePath="/projects/tags/" />
+  <TagIndex groups={groups} basePath="/projects/tags/" />
 </PageLayout>

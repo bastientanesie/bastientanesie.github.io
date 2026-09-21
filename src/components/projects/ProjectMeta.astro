@@ -6,11 +6,13 @@ interface Props {
   project: Project;
 }
 
-const { role, startedAt, endedAt } = Astro.props.project.data;
+const { role, client, employer, startedAt, endedAt } = Astro.props.project.data;
+const clientLabel = employer ? `${client} (via ${employer})` : client;
 ---
 
 <p class="text-muted text-sm">
-  {role} · <time datetime={startedAt}>{formatYearMonth(startedAt)}</time>
+  {`${role} · ${clientLabel} · `}
+  <time datetime={startedAt}>{formatYearMonth(startedAt)}</time>
   {" – "}
   {endedAt ? (
     <time datetime={endedAt}>{formatYearMonth(endedAt)}</time>

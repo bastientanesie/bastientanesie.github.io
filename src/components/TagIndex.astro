@@ -2,11 +2,11 @@
 import type { TagSummary } from "../lib/tags";
 
 interface Props {
-  tags: TagSummary<string>[];
+  groups: { name?: string; tags: TagSummary<string>[] }[];
   basePath: string;
 }
 
-const { tags, basePath } = Astro.props;
+const { groups, basePath } = Astro.props;
 ---
 
 <div x-data="tagFilter">
@@ -18,16 +18,21 @@ const { tags, basePath } = Astro.props;
       class="w-full max-w-xs rounded-md border border-border px-2 py-1"
     />
   </label>
-  <ul class="flex flex-wrap gap-2" aria-label="Tags">
-    {tags.map(({ tag, count }) => (
-      <li data-tag={tag} x-show="isMatching">
-        <a
-          href={`${basePath}${tag}/`}
-          class="rounded-md border border-border px-2 py-1 text-sm underline-offset-4 hover:underline"
-        >
-          #{tag} <span class="text-muted">({count})</span>
-        </a>
-      </li>
-    ))}
-  </ul>
+  {groups.map(({ name, tags }) => (
+    <section class="mb-6">
+      {name && <h2 class="mb-2 text-lg font-semibold">{name}</h2>}
+      <ul class="flex flex-wrap gap-2" aria-label={name ?? "Tags"}>
+        {tags.map(({ tag, label, count }) => (
+          <li data-tag={`${label} ${tag}`.toLowerCase()} x-show="isMatching">
+            <a
+              href={`${basePath}${tag}/`}
+              class="rounded-md border border-border px-2 py-1 text-sm underline-offset-4 hover:underline"
+            >
+              {label} <span class="text-muted">({count})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </div>

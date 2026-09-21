@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+import type { PostTag } from "../data/tags";
 
 const WORDS_PER_MINUTE = 200;
 const CODE_FENCE = /^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1[ \t]*$/gm;
@@ -20,4 +21,8 @@ export function readingTimeMinutes(post: Post): number {
 
 export function formatIsoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
+}
+
+export function postTagsOf({ data }: Post): PostTag[] {
+  return data.tags;
 }
