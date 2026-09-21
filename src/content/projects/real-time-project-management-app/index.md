@@ -5,8 +5,22 @@ client: PERI-G
 employer: Wixiweb
 startedAt: 2018-07
 role: Lead Developer
-techTags: [ember-js, couchdb, node-js, mysql, vue-js, laravel-php, tailwind-css]
-skillTags: [architecture, r-d, team-lead, api, legacy]
+techTags:
+  [
+    ember-js,
+    couchdb,
+    node-js,
+    mysql,
+    vue-js,
+    laravel-php,
+    tailwind-css,
+    docker,
+    gitlab-ci,
+    deployer,
+    playwright,
+    renovate,
+  ]
+skillTags: [architecture, r-d, team-lead, api, legacy, devops]
 logo:
   image: ./perig.jpeg
   alt: PERI-G brand logo
@@ -44,7 +58,14 @@ since 2021, with no viable upgrade path. The replacement stack is Laravel 12, Bl
 CSS, Vue.js for reactive components, and Laravel Reverb for WebSockets — a setup the whole
 team owns, and one that PERI-G could take in-house if they ever needed to.
 
+The rewrite came with a delivery pipeline of its own. GitLab CI and Deployer PHP, both run
+through Docker, build, test and deploy the application over SSH to an Ubuntu server managed
+with Proxmox. Playwright end-to-end tests and Renovate for dependency updates are being
+rolled out on top of it.
+
 ## My Role
+
+### V1: Ember, CouchDB and the Node.js overhaul
 
 I joined as lead developer in 2018, responsible for the frontend architecture from the start.
 That meant doing the R&D work that shaped the initial stack: evaluating React, Vue, and Ember
@@ -63,6 +84,8 @@ several months between two developers. I owned the MySQL side and led the effort
 The result was a complete elimination of the reported slowdowns — and a leaner architecture
 with fewer moving parts and no new bugs introduced.
 
+### V2: Laravel, Vue.js and a delivery pipeline
+
 In 2026, I'm leading the second major rewrite: a full migration from Ember to Laravel and
 Vue.js, structured as incremental lots rather than a single year-long freeze. Migrating
 feature by feature — the project settings page, then the task list, then the task view, and
@@ -70,7 +93,20 @@ so on — was an approach I helped design to make the investment digestible for 
 spread the cost, maintain the existing version between lots, keep shipping. The first lots
 are now underway.
 
-Throughout, I've held technical direction on the project, managed another developer through
+Shipping lot after lot only works if releasing is cheap and safe, so I set up the tooling
+around the code as well. A GitLab CI pipeline, running in Docker, builds the application and
+runs the test suite. Deployer PHP then deploys it over SSH to an Ubuntu server managed with
+Proxmox. The deployment workflow handles database migrations, rollback when a release goes
+wrong, and a maintenance page shown while the switch happens.
+
+Agentic programming has also made a broader safety net affordable: we've started adding
+Playwright end-to-end tests covering the critical user journeys, and we're working on
+Renovate to automate PHP and NPM dependency updates — a direct answer to the deprecated
+Ember version that started all this.
+
+### Throughout
+
+Across both versions, I've held technical direction on the project, managed another developer through
 the MySQL refactor, and stayed close to PERI-G across seven years of shifting scope,
 budget constraints, and architectural decisions.
 
@@ -86,6 +122,8 @@ What I'm most satisfied with is the continuity. The application is still running
 growing: over 2,000 users across 70+ workspaces, nearly 8,000 projects, more than 180,000
 tasks tracked. That doesn't happen by accident after seven years and two architecture changes.
 The rewrite now underway isn't a panic response — it's the planned conclusion of a strategy
-that kept things moving without ever burning the product down to start over. That, in the
+that kept things moving without ever burning the product down to start over. The delivery pipeline, the end-to-end
+tests and automated dependency updates are meant to keep it from drifting into legacy again.
+That, in the
 end, is what the client hired us to do, and what earned us the trust or our clients over
 the years
