@@ -1,6 +1,6 @@
 ---
 title: Why I still choose Laravel for every new project in 2026
-description: "After 15 years of trying frameworks across the PHP ecosystem — from bare-bones CodeIgniter to Symfony, from micro-frameworks to homegrown MVC stacks — I keep coming back to Laravel. Not out of habit, not because I don't know the alternatives, but out of genuine conviction."
+description: "After 15 years across the PHP ecosystem, from CodeIgniter to Symfony, I keep choosing Laravel for new projects. Here's why, beyond habit."
 publishedAt: 2026-03-10
 aiAssisted: true
 tags: ["laravel", "php", "architecture"]

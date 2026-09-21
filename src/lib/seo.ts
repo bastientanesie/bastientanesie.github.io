@@ -37,7 +37,7 @@ interface GraphOptions {
 }
 
 export function documentTitle(title: string): string {
-  return title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+  return title.startsWith(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 }
 
 export function absoluteUrl(path: string, site: URL): string {

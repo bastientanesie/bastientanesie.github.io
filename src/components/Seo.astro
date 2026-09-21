@@ -49,13 +49,16 @@ const graph = noindex
 <meta property="og:site_name" content={SITE_NAME} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:locale" content="en" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:type" content={ogType} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content={String(OG_WIDTH)} />
 <meta property="og:image:height" content={String(OG_HEIGHT)} />
+<meta property="og:image:alt" content={title} />
 <meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
 {!noindex && <meta property="og:url" content={canonical.href} />}
 <link
   rel="alternate"

@@ -34,10 +34,14 @@ test.describe("page titles", () => {
     );
   });
 
-  test("home keeps the bare site name", async ({ page }) => {
+  test("home leads with the site name and is not suffixed", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    await expect(page).toHaveTitle("Bastien Tanésie");
+    await expect(page).toHaveTitle(
+      "Bastien Tanésie — Laravel & PHP Web Developer",
+    );
   });
 });
 
@@ -192,6 +196,34 @@ test.describe("Open Graph images", () => {
       expect(response.headers()["content-type"]).toBe("image/png");
     });
   }
+
+  test("social tags use a valid locale and mirror title and description", async ({
+    page,
+  }) => {
+    await page.goto("/projects/sample-project/");
+
+    await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
+      "content",
+      "en_US",
+    );
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+      "content",
+      "Sample project",
+    );
+    const pairs = [
+      ["twitter:title", "og:title"],
+      ["twitter:description", "og:description"],
+    ] as const;
+    for (const [twitter, og] of pairs) {
+      const expected = await page
+        .locator(`meta[property="${og}"]`)
+        .getAttribute("content");
+      await expect(page.locator(`meta[name="${twitter}"]`)).toHaveAttribute(
+        "content",
+        expected ?? "",
+      );
+    }
+  });
 
   test("a Post is an article and other pages are websites", async ({
     page,
