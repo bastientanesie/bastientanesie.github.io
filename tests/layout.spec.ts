@@ -77,7 +77,7 @@ test.describe("theme", () => {
     await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/");
 
-    await page.getByLabel("Dark").check({ force: true });
+    await page.getByRole("radio", { name: "Dark" }).check({ force: true });
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     for (const scheme of ["light", "dark"]) {
       await expect(page.locator(`meta[data-scheme=${scheme}]`)).toHaveAttribute(
@@ -88,9 +88,9 @@ test.describe("theme", () => {
 
     await page.reload({ waitUntil: "commit" });
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-    await expect(page.getByLabel("Dark")).toBeChecked();
+    await expect(page.getByRole("radio", { name: "Dark" })).toBeChecked();
 
-    await page.getByLabel("System").check({ force: true });
+    await page.getByRole("radio", { name: "System" }).check({ force: true });
     await expect(page.locator("html")).not.toHaveAttribute("data-theme");
     await expect(page.locator("meta[data-scheme=light]")).toHaveAttribute(
       "content",
@@ -122,6 +122,30 @@ test.describe("navigation", () => {
     await expect(menu.getByRole("link")).toHaveCount(3);
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
+  });
+
+  test("theme switcher lives in the menu below the xs breakpoint", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/");
+
+    const theme = page.getByRole("group", { name: "Theme" });
+    await expect(theme).toBeHidden();
+    await page.getByRole("button", { name: "Menu" }).click();
+    await expect(theme).toBeVisible();
+
+    await page.getByRole("radio", { name: "Dark" }).check({ force: true });
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("theme switcher stays in the header from the xs breakpoint", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 432, height: 700 });
+    await page.goto("/");
+
+    await expect(page.getByRole("group", { name: "Theme" })).toBeVisible();
   });
 
   test("footer lists profiles and licenses", async ({ page }) => {
