@@ -1,5 +1,5 @@
 ---
-title: "Ansible Killed My Wiki Procedure (And I Have No Regrets)"
+title: "Ansible Server Provisioning: Why I Replaced Our Wiki Procedure"
 description: "Tired of copy-pasting server setup procedures and hoping for the best? Here's how I replaced our internal wiki with Ansible — and why you should too."
 publishedAt: 2026-03-18
 aiAssisted: true

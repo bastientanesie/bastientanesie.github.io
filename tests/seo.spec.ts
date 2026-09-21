@@ -34,10 +34,14 @@ test.describe("page titles", () => {
     );
   });
 
-  test("home keeps the bare site name", async ({ page }) => {
+  test("home leads with the site name and is not suffixed", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    await expect(page).toHaveTitle("Bastien Tanésie");
+    await expect(page).toHaveTitle(
+      "Bastien Tanésie — Laravel & PHP Web Developer",
+    );
   });
 });
 
