@@ -197,6 +197,30 @@ test.describe("Open Graph images", () => {
     });
   }
 
+  test("social tags use a valid locale and mirror title and description", async ({
+    page,
+  }) => {
+    await page.goto("/projects/sample-project/");
+
+    await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
+      "content",
+      "en_US",
+    );
+    const pairs = [
+      ["twitter:title", "og:title"],
+      ["twitter:description", "og:description"],
+    ] as const;
+    for (const [twitter, og] of pairs) {
+      const expected = await page
+        .locator(`meta[property="${og}"]`)
+        .getAttribute("content");
+      await expect(page.locator(`meta[name="${twitter}"]`)).toHaveAttribute(
+        "content",
+        expected ?? "",
+      );
+    }
+  });
+
   test("a Post is an article and other pages are websites", async ({
     page,
   }) => {
