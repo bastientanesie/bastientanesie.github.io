@@ -145,7 +145,7 @@ test.describe("layout", () => {
       await page.goto("/");
 
       const containers = page.locator(".page-container");
-      await expect(containers).toHaveCount(3);
+      await expect(containers).toHaveCount(4);
       for (const container of await containers.all()) {
         const box = await container.boundingBox();
         expect(box?.width).toBeLessThanOrEqual(2560);
