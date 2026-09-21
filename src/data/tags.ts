@@ -20,7 +20,10 @@ export const projectTechTags = {
   mysql: "MySQL",
   jquery: "jQuery",
   "zend-framework-2": "Zend Framework 2",
+  "zend-framework-3": "Zend Framework 3",
   "hexagonal-architecture": "Hexagonal architecture",
+  "bootstrap-css": "Bootstrap CSS",
+  "webpack": "Webpack",
 } as const;
 
 export type ProjectTechTag = keyof typeof projectTechTags;
@@ -33,6 +36,10 @@ export const projectSkillTags = {
   frontend: "Frontend",
   seo: "SEO",
   startup: "Startup",
+  "project-management": "Project Management",
+  specifications: "Specifications",
+  "solo-delivery": "Solo Delivery",
+  "public-tender": "Public Tender",
 } as const;
 
 export type ProjectSkillTag = keyof typeof projectSkillTags;
