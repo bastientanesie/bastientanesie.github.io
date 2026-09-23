@@ -22,7 +22,10 @@ test.describe("home page", () => {
 });
 
 test.describe("static pages", () => {
-  const pages = [{ path: "/legal/", heading: "Legal notice" }];
+  const pages = [
+    { path: "/legal/", heading: "Legal notice" },
+    { path: "/how-i-work/", heading: "How I work" },
+  ];
 
   for (const { path, heading } of pages) {
     test(`${path} renders its heading`, async ({ page }) => {
@@ -32,7 +35,7 @@ test.describe("static pages", () => {
     });
   }
 
-  for (const path of ["/about/", "/how-i-work/"]) {
+  for (const path of ["/about/"]) {
     test(`${path} is not published in production`, async ({ request }) => {
       expect((await request.get(path)).status()).toBe(404);
     });

@@ -1,0 +1,271 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { linkedInProfile } from "../data/site";
+
+const tldr = [
+  "15 years of full-stack development, expert in Laravel/PHP and Vue.js — scoping adapted to context, demos and a testable environment every sprint",
+  "Simple, maintainable architecture: single-responsibility Actions, thin controllers/models, no unnecessary layers",
+  "Tests calibrated to criticality, Playwright for E2E, automated guardrails (CI, static analysis, Lighthouse) rather than manual review alone",
+  "Infrastructure as code (Ansible) and CI/CD adapted to the client's tools",
+  "90% of my work today relies on agentic programming (Claude Code) with a structured process: scoping, technical spec, breakdown, implementation driven by TDD and best practices",
+  "Tech lead or contributor in a small team depending on the project, with mentoring whenever the opportunity arises",
+];
+---
+
+<PageLayout
+  title="How I work"
+  description="How Bastien Tanésie approaches software projects."
+>
+  <h1 class="text-3xl font-bold">How I work</h1>
+  <p class="mt-4 max-w-prose text-lg">
+    Fifteen years of shipping web applications taught me one thing: the
+    architecture that matters is the one you can still understand and evolve
+    three years later, without rewriting everything. Here's how I get there.
+  </p>
+
+  <section class="mt-8" aria-labelledby="tldr">
+    <h2 id="tldr" class="text-xl font-semibold">
+      TL;DR
+    </h2>
+    <ul class="mt-3 list-disc space-y-2 pl-5">
+      {tldr.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="scoping">
+    <h2 id="scoping" class="text-2xl font-semibold">
+      How I scope a project
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      Scoping adapted to context (detailed specs or fast iteration depending on
+      the project), regular demos and a testable environment accessible every
+      sprint, with scope evolving from real user feedback.
+    </p>
+    <p class="mt-4">
+      The level of upfront scoping depends on context: a public tender requires
+      detailed specifications ahead of time, while a small-team project is
+      better served by light scoping and fast iteration. What doesn't change is
+      what comes next.
+    </p>
+    <p class="mt-4">
+      I work in sprints, with regular demos — but a demo alone isn't enough.
+      Every sprint, I update a test environment the client can access, so they
+      can try new features themselves rather than just watch them.
+    </p>
+    <p class="mt-4">
+      It's by testing, not by watching a demo, that clients and users form a
+      real opinion on what works. And that's often when the scope shifts — not
+      because the spec was wrong, but because no one can anticipate every
+      real-world use case before seeing it in front of them. Better to discover
+      it in sprint 3 than at final delivery.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="architecture">
+    <h2 id="architecture" class="text-2xl font-semibold">
+      My default architecture
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      Thin controllers, thin models, business logic encapsulated in
+      single-responsibility Action classes — designed to stay simple and
+      maintainable, without unnecessary layers.
+    </p>
+    <pre class="mt-4 overflow-x-auto rounded-md border border-border p-4"><code>{`app/
+  Actions/          # one class = one business action, with its validation
+  Http/
+    Controllers/    # thin, orchestration only
+    Requests/
+  Jobs/              # call Actions in the background
+  Models/            # thin, no business logic
+  Policies/          # access control, applied scrupulously
+  Services/          # third-party API calls, complex flows`}</code></pre>
+    <p class="mt-4">
+      Actions are the heart of the architecture: each class encapsulates a
+      business action with its logic and validation, with entry points adapted
+      to context — <code>fromRequest()</code> for an HTTP call,{" "}
+      <code>fromConsole()</code> for a CLI command, for example. Controllers and
+      models stay deliberately thin: their role is to orchestrate, not to carry
+      logic.
+    </p>
+    <p class="mt-4">
+      Policies handle access control and are applied systematically, with no
+      exceptions. Services encapsulate third-party API calls or more complex
+      flows. Jobs call Actions to improve response times and guarantee
+      resilience and data integrity on asynchronous processing.
+    </p>
+    <p class="mt-4">
+      Depending on the project, I add hand-rolled Value Objects and/or View Models
+      when the domain's complexity genuinely justifies it, never by default.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="tests">
+    <h2 id="tests" class="text-2xl font-semibold">
+      Testing and quality
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      A level of testing proportional to code criticality, and a systematic
+      review of everything that reaches production — including AI-generated code
+      — so the project stays maintainable over time.
+    </p>
+    <p class="mt-4">
+      I don't apply TDD systematically: I calibrate testing effort to code
+      criticality. An Action touching billing or access rights gets tested
+      thoroughly, sometimes before it's even written. A low-stakes internal
+      admin screen doesn't carry the same requirement. For critical user
+      journeys, I use Playwright for end-to-end tests that validate the
+      application's real behavior, not just a unit of code.
+    </p>
+    <p class="mt-4">
+      My real obsession is the long-term maintainability of what gets shipped. A
+      project lives for years, changes hands, and gets touched by developers who
+      don't know it. And with AI now generating code at a pace no team can fully
+      review, human review alone is no longer enough to guarantee quality.
+      That's why I push to multiply automated guardrails, run in pre-commit or
+      in CI: unit tests, end-to-end tests with Playwright, static analysis,
+      Lighthouse-style performance scores. These tools, more than review alone,
+      guarantee a consistent quality bar — whether the code was written by an AI
+      or a human.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="devops">
+    <h2 id="devops" class="text-2xl font-semibold">
+      Tools and DevOps
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      CI/CD adapted to the client's tools (GitHub Actions or GitLab CI), and a
+      strong conviction for infrastructure as code — provisioning should never
+      rely on human copy-paste.
+    </p>
+    <p class="mt-4">
+      I adapt to whatever's already in place: GitHub Actions or GitLab CI
+      depending on the client's context and habits. What matters isn't the tool,
+      it's that tests, static analysis and deployment are automated and
+      reproducible, not run by hand before every release.
+    </p>
+    <p class="mt-4">
+      On provisioning, I'm convinced by infrastructure as code: describing a
+      server in versioned code rather than following a wiki procedure. On the
+      servers I manage myself, this is now systematic with Ansible — no
+      configuration relies on memory or copy-paste anymore. At a client like
+      Wixiweb, where history was built on manual procedures documented in a
+      wiki, I advocate internally for the same shift: a human copying a
+      procedure always ends up introducing an error that an Ansible playbook
+      doesn't.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="ai">
+    <h2 id="ai" class="text-2xl font-semibold">
+      My practice of AI and agentic programming
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      AI accounts for at least 90% of my development work today, with a
+      structured process — scoping, technical spec, breakdown into tickets,
+      implementation by an autonomous agent — rather than informal use.
+    </p>
+    <p class="mt-4">
+      I work primarily with Claude Code (Sonnet), following a process I built
+      around Matt Pocock's skills, because they match how I like to work best: a
+      "grilling" session to close every blind spot in a functional spec, writing
+      a solid technical spec, breaking it down into tickets, then implementation
+      by an autonomous agent. All of it framed by TDD, proven design patterns,
+      and a set of skills that steer agents toward good practices and the right
+      tools.
+    </p>
+    <p class="mt-4">
+      On paper, it sounds simple. In practice, it's proven remarkably effective
+      on my last two or three projects. And it's not a plateau: the more I
+      invest in scoping tools and quality guardrails, the higher the bar for the
+      code produced keeps climbing. It's a young practice, but one that already
+      structures most of my work — not a side gadget.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="team">
+    <h2 id="team" class="text-2xl font-semibold">
+      How I work in a team
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      Fifteen years alternating between tech lead and contributor in a small,
+      cohesive team, with knowledge-sharing I never turn down when the
+      opportunity comes up.
+    </p>
+    <p class="mt-4">
+      For the past five years, I've moved continuously between two postures
+      depending on the project: sometimes tech lead with real decision-making
+      autonomy over architecture and structural choices, sometimes just a member
+      of a small, cohesive team where I contribute without owning final
+      responsibility. Both suit me — what matters is the size and cohesion of
+      the team, not my role in it.
+    </p>
+    <p class="mt-4">
+      I mentored an apprentice for a year, and spent five months onboarding a
+      junior developer onto a project carrying over ten years of legacy code —
+      training them as lead so we could pair, until they became autonomous on
+      other projects. Beyond these longer engagements, I've never turned down
+      helping a developer or sharing what I've learned over fifteen years,
+      whenever the opportunity arises. On a legacy project, that often means
+      explaining the why behind a historical choice before questioning it —
+      understanding before rewriting, which is also why I push for ADRs: a
+      decision's context should be documented when it's made, not reconstructed
+      three years later.
+    </p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="tradeoffs">
+    <h2 id="tradeoffs" class="text-2xl font-semibold">
+      Trade-offs I own
+    </h2>
+    <p class="mt-4 border-l-4 border-border pl-4 font-semibold">
+      Laravel exposes you to dependency on an ecosystem driven by a small team,
+      and I haven't yet managed to get static analysis adopted on every client
+      project — two limitations I'd rather name than hide.
+    </p>
+    <p class="mt-4">
+      Choosing Laravel means accepting a form of dependency: the quality of the
+      ecosystem largely rests on a small team around Taylor Otwell, unlike
+      broader governance such as Symfony's. It's a real vendor lock-in risk, one
+      I take on knowingly. In return, the richness and quality of the ecosystem
+      (Horizon, Passport, Reverb, and many others) save considerable time,
+      and Laravel has shown it can adapt fast to new practices — the integration
+      of AI into its tools and workflows is a good recent example. The
+      productivity and enjoyment it brings largely outweigh, in my view, the
+      dependency risk.
+    </p>
+    <p class="mt-4">
+      On static analysis (PHPStan/Larastan), I'm not the one deciding practices
+      at Wixiweb — so I haven't yet managed to get it adopted on every client
+      project. It's a medium-term goal I'm working toward, not a given: over the
+      years, I've already managed to move the team on Git, GitLab CI, automated
+      deployment, Laravel or Vue.js — by convincing rather than imposing. Static
+      analysis is following the same path, more slowly, but I'd rather say so
+      than let anyone think it's already everywhere.
+    </p>
+  </section>
+
+  <section
+    class="mt-12 rounded-md border border-border p-6"
+    aria-labelledby="contact"
+  >
+    <h2 id="contact" class="text-2xl font-semibold">
+      Want to talk about it?
+    </h2>
+    <p class="mt-2 max-w-prose">
+      This is how I work, with its strengths and its still-unfinished edges. If
+      it matches what you're looking for — or if you'd like to dig into a
+      specific point — the simplest is to talk directly.
+    </p>
+    <p class="mt-4">
+      <a
+        href={linkedInProfile.href}
+        class="font-semibold underline underline-offset-4"
+      >
+        Get in touch on LinkedIn
+      </a>
+    </p>
+  </section>
+</PageLayout>
