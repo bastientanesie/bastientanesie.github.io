@@ -1,6 +1,8 @@
 ---
+import type { MarkdownHeading } from "astro";
 import ProjectLogo from "../components/projects/ProjectLogo.astro";
 import ProjectMeta from "../components/projects/ProjectMeta.astro";
+import TableOfContents from "../components/shared/TableOfContents.astro";
 import { projectSkillTags, projectTechTags } from "../data/tags";
 import type { Project } from "../lib/projects";
 import { ogImagePath } from "../lib/og-image";
@@ -9,9 +11,10 @@ import PageLayout from "./PageLayout.astro";
 
 interface Props {
   project: Project;
+  headings: MarkdownHeading[];
 }
 
-const { project } = Astro.props;
+const { project, headings } = Astro.props;
 const { title, description, techTags, skillTags } = project.data;
 const tagGroups = [
   { name: "Tech tags", tags: techTags, labels: projectTechTags },
@@ -50,6 +53,7 @@ const nodes = [buildProjectNode(project, resolveSite(Astro))];
         ))}
       </div>
     </header>
+    <TableOfContents headings={headings} />
     <div class="prose-content space-y-4">
       <slot />
     </div>
