@@ -1,13 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import About from "../drafts/about.astro";
-import HowIWork from "../drafts/how-i-work.astro";
 
-const drafts = { about: About, "how-i-work": HowIWork };
+const drafts = { about: About };
 
 export const getStaticPaths = (() =>
   import.meta.env.DEV
-    ? [{ params: { draft: "about" } }, { params: { draft: "how-i-work" } }]
+    ? [{ params: { draft: "about" } }]
     : []) satisfies GetStaticPaths;
 
 const Draft = drafts[Astro.params.draft as keyof typeof drafts];
