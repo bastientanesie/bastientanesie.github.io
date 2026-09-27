@@ -28,7 +28,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "alpinejs": "^3.17.3",
     "astro": "^7.3.3",
-    "satori": "^0.33.4",
+    "satori": "^0.33.5",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
