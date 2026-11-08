@@ -37,15 +37,15 @@
     "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "^10.0.1",
-    "@lhci/cli": "^0.15.1",
+    "@lhci/cli": "^0.16.0",
     "@playwright/test": "1.63.0",
     "@types/alpinejs": "^3.13.11",
-    "eslint": "^10.11.0",
+    "eslint": "^10.14.0",
     "eslint-plugin-astro": "^3.2.1",
-    "prettier": "^3.9.8",
-    "prettier-plugin-astro": "^1.0.1",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
     "serve": "^14.2.6",
-    "typescript-eslint": "^8.70.0",
-    "vitest": "5.0.1"
+    "typescript-eslint": "^8.72.1",
+    "vitest": "5.1.0"
   }
 }
